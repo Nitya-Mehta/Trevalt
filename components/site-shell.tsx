@@ -76,6 +76,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                     {item.label}
                   </Link>
                 ))}
+                <Link href="/terms" className="transition-colors duration-200 ease-smooth hover:text-ink w-fit">
+                  Terms
+                </Link>
               </nav>
             </div>
 

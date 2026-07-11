@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -19,11 +19,27 @@ export function HomepageClient() {
   const majorOneRef = useRef<HTMLElement | null>(null);
   const majorTwoRef = useRef<HTMLElement | null>(null);
   const minorRef = useRef<HTMLElement | null>(null);
+  const minorConstraintsRef = useRef<HTMLDivElement | null>(null);
   const closingRef = useRef<HTMLElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const majorProjects = useMemo(() => projects.filter((project) => project.tier === 'major'), []);
   const minorProjects = useMemo(() => projects.filter((project) => project.tier === 'minor'), []);
+
+  const scatterPositions = useMemo(() => [
+    { left: '4%', top: '15%', rotate: -3 },
+    { left: '36%', top: '35%', rotate: 2 },
+    { left: '68%', top: '10%', rotate: -2 },
+  ], []);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -365,51 +381,73 @@ export function HomepageClient() {
       </section>
 
       {/* Minor Projects */}
-      <section ref={minorRef} className="relative overflow-hidden border-b border-border">
-        <div className="mx-auto max-w-[var(--page-max)] px-5 py-16 md:px-8 md:py-24">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between border-b border-border pb-8">
-            <h2 className="max-w-[32rem] font-display text-4xl font-bold tracking-display md:text-5xl">
-              Lab studies & distributed modules.
+      <section ref={minorRef} className="relative overflow-hidden border-b border-border bg-paper bg-[linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] bg-[size:40px_40px]">
+        <div ref={minorConstraintsRef} className="relative mx-auto w-full max-w-[var(--page-max)] px-5 py-16 md:px-8 md:py-24 md:min-h-[750px]">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between border-b border-border md:border-none pb-8 md:pb-0 pointer-events-none relative z-10">
+            <h2 className="max-w-[32rem] font-display text-4xl font-bold tracking-display md:text-5xl bg-paper/80 backdrop-blur-sm p-2 -ml-2 rounded-lg">
+              More projects.
             </h2>
-            <p className="mt-4 font-mono text-[0.72rem] uppercase tracking-[0.2em] text-muted md:mt-0">
-              [SYSTEM_REPOS // 03-05]
-            </p>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {minorProjects.map((project, index) => (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                data-minor-item
-                className={`group border border-border bg-card/45 p-6 flex flex-col justify-between min-h-[300px] transition-colors duration-200 hover:bg-card/75 hover:border-accent/40 ${index === 1 ? 'md:translate-y-6' : ''
-                  } ${index === 2 ? 'md:translate-y-12' : ''}`}
+            <div className="mt-4 md:mt-0 bg-paper/80 backdrop-blur-sm p-2 rounded-lg">
+              <p 
+                className="text-lg text-accent tracking-wide normal-case"
+                style={{ fontFamily: "'Brush Script MT', 'Apple Chancery', 'Comic Sans MS', cursive" }}
               >
-                <div>
-                  <div className="flex justify-between items-center font-mono text-[0.65rem] tracking-[0.2em] text-accent uppercase">
-                    <span>[SLOT 0{index + 3}]</span>
-                    <span>{project.category ?? 'MODULE'}</span>
-                  </div>
-                  <h3 className="mt-6 font-display text-3xl font-bold tracking-display group-hover:text-accent transition-colors duration-200">{project.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-muted">{project.tagline}</p>
-                </div>
+                interactive — drag cards to explore
+              </p>
+            </div>
+          </div>
 
-                <div className="mt-8">
-                  <div className="flex flex-wrap gap-2 text-[0.65rem] font-mono uppercase tracking-[0.16em] text-muted border-t border-border/60 pt-4 mb-5">
-                    {project.tech.map((tag) => (
-                      <span key={tag} className="border border-border/80 px-2 py-1">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <span
-                    className="inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ink group-hover:text-accent transition-colors"
+          <div className="mt-12 grid gap-6 md:mt-0 md:block relative z-20">
+            {minorProjects.map((project, index) => {
+              const pos = scatterPositions[index % scatterPositions.length];
+              return (
+                <div 
+                  key={project.slug}
+                  data-minor-item 
+                  className={isMobile ? "w-full" : "absolute"} 
+                  style={isMobile ? {} : { left: pos.left, top: pos.top }}
+                >
+                  <motion.div
+                    drag={!isMobile}
+                    dragConstraints={minorConstraintsRef}
+                    dragElastic={0.1}
+                    whileDrag={{ scale: 1.02, boxShadow: '0 20px 40px rgba(0,0,0,0.5)', zIndex: 50 }}
+                    style={{ 
+                      rotate: isMobile ? 0 : pos.rotate, 
+                      width: isMobile ? '100%' : '340px' 
+                    }}
+                    className="group border border-border bg-card p-6 flex flex-col justify-between min-h-[300px] transition-colors duration-200 hover:border-accent/50 md:cursor-grab md:active:cursor-grabbing select-none shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
                   >
-                    INSPECT LAB BRIEF
-                    <ArrowUpRightIcon />
-                  </span>
+                    <div className="pointer-events-none">
+                      <div className="flex justify-between items-center font-mono text-[0.65rem] tracking-[0.2em] text-accent uppercase">
+                        <span>[SLOT 0{index + 3}]</span>
+                        <span>{project.category ?? 'MODULE'}</span>
+                      </div>
+                      <h3 className="mt-6 font-display text-3xl font-bold tracking-display group-hover:text-accent transition-colors duration-200">{project.title}</h3>
+                      <p className="mt-3 text-sm leading-6 text-muted">{project.tagline}</p>
+                    </div>
+
+                    <div className="mt-8">
+                      <div className="flex flex-wrap gap-2 text-[0.65rem] font-mono uppercase tracking-[0.16em] text-muted border-t border-border/60 pt-4 mb-5 pointer-events-none">
+                        {project.tech.map((tag) => (
+                          <span key={tag} className="border border-border/80 px-2 py-1">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        onPointerDown={(e) => e.stopPropagation()}
+                        className="inline-flex w-fit items-center gap-2 rounded border border-border/60 bg-paper/50 px-4 py-2.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-ink transition-colors hover:border-accent hover:text-accent md:cursor-pointer"
+                      >
+                        OPEN PROJECT
+                        <ArrowUpRightIcon />
+                      </Link>
+                    </div>
+                  </motion.div>
                 </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

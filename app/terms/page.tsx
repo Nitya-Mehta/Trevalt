@@ -41,6 +41,7 @@ const serviceSections = [
     body: [
       'Trevalt\'s total liability under a project agreement will not exceed the total amount paid for that engagement.',
       'Trevalt is not liable for indirect, incidental, or consequential damages, including loss of profits, loss of data, or business interruption arising from use of the delivered product.',
+      'We are strictly not liable for any data loss incurred by the client or their end-users under any circumstances. Furthermore, we do not sell or expose client data; any portfolio demonstrations are explicitly scrubbed, data-free clones approved by the client.',
     ],
   },
   {
@@ -53,7 +54,7 @@ const serviceSections = [
     title: 'Intellectual property and portfolio rights',
     body: [
       'Upon full payment, ownership of custom code developed specifically for the client transfers to the client. Trevalt retains ownership of pre-existing tools, frameworks, libraries, and reusable components used in delivery.',
-      'Trevalt may display completed work in its portfolio unless the client requests confidentiality in writing before the project begins.',
+      'Trevalt may display completed work in its portfolio unless the client requests confidentiality in writing before the project begins. Any portfolio display will strictly be a structural clone showing only the website\'s UI/UX without any of your actual personal or proprietary project data. We will request your explicit permission every time before featuring a project.',
     ],
   },
   {
@@ -144,7 +145,7 @@ export default function TermsPage() {
               <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-accent">Privacy</p>
               <h2 className="mt-3 font-display text-3xl font-bold tracking-display md:text-4xl">Privacy summary</h2>
               <p className="mt-5 text-muted md:text-base md:leading-7">
-                Trevalt uses contact form submissions only to respond to inquiries and operates the site with the service providers required for hosting and form handling. For questions about data handling, email <a className="text-ink underline decoration-accent underline-offset-4" href="mailto:hello@trevalt.com">hello@trevalt.com</a>.
+                Trevalt uses contact form submissions only to respond to inquiries and operates the site with the service providers required for hosting and form handling. We strictly do not sell, rent, or display any of your personal or project data to third parties. If a project is featured on our portfolio, it will be a data-free clone showing only the design structure, and we will request your explicit permission every time beforehand. For questions about data handling, email <a className="text-ink underline decoration-accent underline-offset-4" href="mailto:hello@trevalt.com">hello@trevalt.com</a>.
               </p>
             </div>
           </div>
