@@ -1,0 +1,13 @@
+<svg width="1200" height="685" viewBox="0 0 1200 685" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="685" rx="20" fill="#F6EFE2"/>
+  <line x1="612" y1="78" x2="612" y2="607" stroke="#0B2142" stroke-opacity="0.18" stroke-width="2"/>
+  <text x="72" y="96" fill="#0B2142" fill-opacity="0.72" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="3">DEVELOPER.</text>
+  <text x="72" y="165" fill="#0B2142" font-family="Fraunces, Georgia, serif" font-size="62" font-weight="900" letter-spacing="-3">Nitya Mehta</text>
+  <text x="72" y="456" fill="#0B2142" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="3">LINKEDIN</text>
+  <text x="72" y="514" fill="#0B2142" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="3">GITHUB</text>
+  <text x="720" y="150" fill="#0B2142" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="3">EMAIL</text>
+  <text x="720" y="198" fill="#0B2142" font-family="System-ui, sans-serif" font-size="28">nitya@trevalt.com</text>
+  <text x="720" y="310" fill="#0B2142" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="3">PHONE</text>
+  <text x="720" y="358" fill="#0B2142" font-family="System-ui, sans-serif" font-size="28">+91 90000 00001</text>
+  <text x="72" y="620" fill="#0B2142" fill-opacity="0.72" font-family="System-ui, sans-serif" font-size="24">Placeholder bio line for the back face.</text>
+</svg>
