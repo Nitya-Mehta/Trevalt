@@ -388,7 +388,7 @@ export function HomepageClient() {
               More projects.
             </h2>
             <div className="mt-4 md:mt-0 bg-paper/80 backdrop-blur-sm p-2 rounded-lg">
-              <p 
+              <p
                 className="text-lg text-accent tracking-wide normal-case"
                 style={{ fontFamily: "'Brush Script MT', 'Apple Chancery', 'Comic Sans MS', cursive" }}
               >
@@ -401,10 +401,10 @@ export function HomepageClient() {
             {minorProjects.map((project, index) => {
               const pos = scatterPositions[index % scatterPositions.length];
               return (
-                <div 
+                <div
                   key={project.slug}
-                  data-minor-item 
-                  className={isMobile ? "w-full" : "absolute"} 
+                  data-minor-item
+                  className={isMobile ? "w-full" : "absolute"}
                   style={isMobile ? {} : { left: pos.left, top: pos.top }}
                 >
                   <motion.div
@@ -412,9 +412,9 @@ export function HomepageClient() {
                     dragConstraints={minorConstraintsRef}
                     dragElastic={0.1}
                     whileDrag={{ scale: 1.02, boxShadow: '0 20px 40px rgba(0,0,0,0.5)', zIndex: 50 }}
-                    style={{ 
-                      rotate: isMobile ? 0 : pos.rotate, 
-                      width: isMobile ? '100%' : '340px' 
+                    style={{
+                      rotate: isMobile ? 0 : pos.rotate,
+                      width: isMobile ? '100%' : '340px'
                     }}
                     className="group border border-border bg-card p-6 flex flex-col justify-between min-h-[300px] transition-colors duration-200 hover:border-accent/50 md:cursor-grab md:active:cursor-grabbing select-none shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
                   >

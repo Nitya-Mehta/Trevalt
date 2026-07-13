@@ -57,16 +57,16 @@ export default function AboutPage() {
                 </div>
                 {founder.name.includes('Nitya') ? (
                   <>
-                    <div 
+                    <div
                       className="relative w-full aspect-[1.6/1] rounded-[6px] overflow-hidden border border-border/80 group cursor-pointer bg-card"
                       onMouseEnter={() => setIsNityaFlipped(true)}
                       onMouseLeave={() => setIsNityaFlipped(false)}
                       onClick={() => setIsNityaFlipped(!isNityaFlipped)}
                     >
-                      <Image 
-                        src="/images/nitya.jpg" 
-                        alt="Nitya Mehta" 
-                        fill 
+                      <Image
+                        src="/images/nitya.jpg"
+                        alt="Nitya Mehta"
+                        fill
                         sizes="(max-width: 1024px) 100vw, 33vw"
                         priority
                         className="object-cover object-center"
@@ -95,10 +95,10 @@ export default function AboutPage() {
                       {/* Subtle blueprint grid background inside the avatar slot */}
                       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,85,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,85,0,0.03)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
                       <div className="relative w-[110px] h-[110px] transition-transform duration-300 group-hover:scale-110">
-                        <Image 
-                          src={founder.name.includes('Aarav') ? "/images/mascot/bear_08_cool.png" : "/images/mascot/bear_06_thinking.png"} 
-                          alt={`${founder.name} Mascot`} 
-                          fill 
+                        <Image
+                          src={founder.name.includes('Aarav') ? "/images/mascot/bear_08_cool.png" : "/images/mascot/bear_06_thinking.png"}
+                          alt={`${founder.name} Mascot`}
+                          fill
                           sizes="110px"
                           className="object-contain"
                         />
@@ -127,8 +127,8 @@ export default function AboutPage() {
                   onMouseLeave={() => founder.name.includes('Nitya') && setIsNityaFlipped(false)}
                   className="w-full"
                 >
-                  <FounderCard 
-                    founder={founder} 
+                  <FounderCard
+                    founder={founder}
                     isFlipped={founder.name.includes('Nitya') ? isNityaFlipped : undefined}
                     onToggleFlip={founder.name.includes('Nitya') ? () => setIsNityaFlipped(!isNityaFlipped) : undefined}
                   />

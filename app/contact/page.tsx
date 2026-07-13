@@ -1,10 +1,29 @@
+'use client';
+
 import Image from 'next/image';
 import { SiteShell } from '@/components/site-shell';
+import { useFormState, useFormStatus } from 'react-dom';
+import { submitContactForm } from '@/app/actions/contact';
 
 const projectTypes = ['Brand site', 'Product website', 'Case study refresh', 'Android app', 'Other'];
 const budgetRanges = ['Under $5k', '$5k-$15k', '$15k-$30k', '$30k+'];
 
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full justify-center rounded-xl border border-accent bg-accent py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      {pending ? 'Transmitting...' : 'Transmit brief'}
+    </button>
+  );
+}
+
 export default function ContactPage() {
+  const [state, formAction] = useFormState(submitContactForm, null);
+
   return (
     <SiteShell>
       <section className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-20">
@@ -92,88 +111,95 @@ export default function ContactPage() {
             <span className="font-mono text-[0.65rem] tracking-[0.2em] text-accent uppercase block mb-6">
               [INTAKE_PARAMS_FORM]
             </span>
-            <form
-              className="grid gap-6"
-              action={process.env.NEXT_PUBLIC_FORMSPREE_ACTION || 'https://formspree.io/f/replace-me'}
-              method="POST"
-            >
-              <div className="grid gap-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_CLIENT_NAME]</label>
-                <input
-                  required
-                  name="name"
-                  placeholder="Nitya Mehta"
-                  className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
-                />
+            
+            {state?.success ? (
+              <div className="rounded-xl border border-accent/50 bg-accent/10 p-6 text-center text-accent">
+                <p className="font-mono text-sm uppercase tracking-widest mb-2">[TRANSMISSION_SUCCESS]</p>
+                <p className="text-sm">Your brief has been received. We will initiate contact within 24 hours.</p>
               </div>
-
-              <div className="grid gap-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_CLIENT_EMAIL]</label>
-                <input
-                  required
-                  name="email"
-                  type="email"
-                  placeholder="client@enclave.com"
-                  className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
-                />
-              </div>
-
-              <div className="grid gap-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_PROJECT_TYPE]</label>
-                <select
-                  required
-                  name="projectType"
-                  className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent appearance-none cursor-pointer"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select payload target
-                  </option>
-                  {projectTypes.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="grid gap-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_BUDGET_RANGE]</label>
-                <select
-                  required
-                  name="budget"
-                  className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent appearance-none cursor-pointer"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select allocate scope
-                  </option>
-                  {budgetRanges.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="grid gap-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_BRIEF_PAYLOAD]</label>
-                <textarea
-                  required
-                  name="message"
-                  placeholder="Provide scope parameters, API targets, and engineering constraints..."
-                  rows={5}
-                  className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent resize-none"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full justify-center rounded-xl border border-accent bg-accent py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.01]"
+            ) : (
+              <form
+                className="grid gap-6"
+                action={formAction}
               >
-                Transmit brief
-              </button>
-            </form>
+                {state?.error && (
+                  <div className="rounded-xl border border-red-500/50 bg-red-500/10 p-4 text-center text-red-500 text-sm">
+                    {state.error}
+                  </div>
+                )}
+                <div className="grid gap-2">
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_CLIENT_NAME]</label>
+                  <input
+                    required
+                    name="name"
+                    placeholder="Nitya Mehta"
+                    className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_CLIENT_EMAIL]</label>
+                  <input
+                    required
+                    name="email"
+                    type="email"
+                    placeholder="client@enclave.com"
+                    className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_PROJECT_TYPE]</label>
+                  <select
+                    required
+                    name="project_type"
+                    className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent appearance-none cursor-pointer"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Select payload target
+                    </option>
+                    {projectTypes.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="grid gap-2">
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_BUDGET_RANGE]</label>
+                  <select
+                    required
+                    name="budget_range"
+                    className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent appearance-none cursor-pointer"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Select allocate scope
+                    </option>
+                    {budgetRanges.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="grid gap-2">
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_BRIEF_PAYLOAD]</label>
+                  <textarea
+                    required
+                    name="message"
+                    placeholder="Provide scope parameters, API targets, and engineering constraints..."
+                    rows={5}
+                    className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent resize-none"
+                  />
+                </div>
+
+                <SubmitButton />
+              </form>
+            )}
           </div>
           
         </div>
