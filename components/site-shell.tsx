@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { LoadingReveal } from '@/components/loading-reveal';
+import { AuthNavLinks } from '@/components/auth-nav-links';
 
 const nav = [
   { href: '/projects', label: 'Projects' },
@@ -34,6 +35,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 {item.label}
               </Link>
             ))}
+            <AuthNavLinks />
           </nav>
         </div>
       </header>

@@ -149,7 +149,8 @@ export async function createClientAccount(prevState: any, formData: FormData) {
       id: newUser.user.id,
       email,
       full_name: fullName,
-      role: 'client'
+      role: 'client',
+      requires_password_change: true
     });
 
   if (profileError) {
@@ -161,4 +162,64 @@ export async function createClientAccount(prevState: any, formData: FormData) {
 
   revalidatePath('/admin');
   return { success: `Client account created for ${email}.` };
+}
+
+export async function completeSetupWithNewPassword(prevState: any, formData: FormData) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: 'Unauthorized.' };
+  }
+
+  const password = formData.get('password') as string;
+  if (!password || password.length < 6) {
+    return { error: 'Password must be at least 6 characters long.' };
+  }
+
+  // Update auth password
+  const { error: updateError } = await supabase.auth.updateUser({ password });
+  if (updateError) {
+    console.error('Error updating password:', updateError);
+    return { error: updateError.message };
+  }
+
+  // Remove requires_password_change flag
+  const adminClient = createAdminClient();
+  const { error: profileError } = await adminClient
+    .from('profiles')
+    .update({ requires_password_change: false })
+    .eq('id', user.id);
+
+  if (profileError) {
+    console.error('Error updating profile:', profileError);
+    return { error: 'Password updated, but failed to complete setup flag.' };
+  }
+
+  revalidatePath('/dashboard', 'layout');
+  redirect('/dashboard');
+}
+
+export async function keepTemporaryPassword() {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: 'Unauthorized.' };
+  }
+
+  // Remove requires_password_change flag
+  const adminClient = createAdminClient();
+  const { error: profileError } = await adminClient
+    .from('profiles')
+    .update({ requires_password_change: false })
+    .eq('id', user.id);
+
+  if (profileError) {
+    console.error('Error updating profile:', profileError);
+    return { error: 'Failed to complete setup.' };
+  }
+
+  revalidatePath('/dashboard', 'layout');
+  redirect('/dashboard');
 }

@@ -1,6 +1,8 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
+import Link from 'next/link';
+import { SiteShell } from '@/components/site-shell';
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const supabase = createClient();
@@ -12,7 +14,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('role')
+    .select('role, requires_password_change')
     .eq('id', user.id)
     .single();
 
@@ -23,28 +25,36 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     redirect('/login?error=Invalid+account+configuration.+Contact+support.');
   }
 
-  return (
-    <div className="min-h-screen bg-paper text-ink flex flex-col">
-      <header className="border-b border-border bg-card/50 px-6 md:px-12 py-4 flex justify-between items-center">
-        <div>
-          <span className="font-mono text-[0.65rem] tracking-[0.28em] text-accent uppercase block">
-            [CLIENT_ENCLAVE]
-          </span>
-          <h2 className="font-display text-lg font-bold mt-1 text-ink">
-            Trevalt Projects
-          </h2>
-        </div>
-        
-        <form action="/auth/signout" method="post">
-          <button className="font-mono text-xs uppercase tracking-widest text-muted hover:text-accent transition-colors">
-            Disconnect
-          </button>
-        </form>
-      </header>
+  if (profile?.requires_password_change) {
+    redirect('/setup');
+  }
 
-      <main className="flex-1 p-6 md:p-12 overflow-y-auto max-w-[var(--page-max)] w-full mx-auto">
-        {children}
-      </main>
-    </div>
+  return (
+    <SiteShell>
+      <div className="flex flex-col md:flex-row min-h-[calc(100vh-140px)]">
+        {/* Sidebar Navigation */}
+        <aside className="w-full md:w-64 border-r border-border bg-card/50 shrink-0 flex flex-col">
+          <div className="p-6 md:p-8">
+            <span className="font-mono text-[0.65rem] tracking-[0.28em] text-accent uppercase block">
+              [CLIENT DASHBOARD]
+            </span>
+            <h2 className="font-display text-xl font-bold mt-2 text-ink">
+              Trevalt Projects
+            </h2>
+          </div>
+
+          <div className="flex-grow p-6 md:p-8 pt-0 space-y-4 font-mono text-xs uppercase tracking-widest text-muted">
+            <Link href="/dashboard" className="block hover:text-accent transition-colors">
+              Active Scopes
+            </Link>
+          </div>
+        </aside>
+
+        {/* Main Content Area */}
+        <main className="flex-1 p-6 md:p-12 overflow-y-auto">
+          {children}
+        </main>
+      </div>
+    </SiteShell>
   );
 }

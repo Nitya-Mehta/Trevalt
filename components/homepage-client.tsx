@@ -457,7 +457,7 @@ export function HomepageClient() {
         <div className="mx-auto grid w-full max-w-[var(--page-max)] gap-12 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-end md:px-8 md:py-24">
           <div className="flex flex-col gap-8">
             <div className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-accent">
-              [COMMUNICATIONS ENCLAVE]
+              [START A PROJECT]
             </div>
             <h2 data-closing-copy className="max-w-[32rem] font-display text-5xl font-bold leading-[0.95] tracking-display md:text-7xl">
               Ready when the content is.
@@ -466,7 +466,7 @@ export function HomepageClient() {
               href="/contact"
               className="inline-flex w-fit items-center rounded-xl border border-accent bg-accent px-6 py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.02]"
             >
-              Initialize inquiry
+              Get in touch
               <ArrowUpRightIcon />
             </Link>
           </div>
@@ -478,7 +478,7 @@ export function HomepageClient() {
             </div>
 
             <div className="grid gap-2 border-b border-border/60 pb-4">
-              <span className="text-accent">TELEMETRY REGISTRY</span>
+              <span className="text-accent">PROJECT PORTFOLIO</span>
               <span className="text-sm text-muted leading-6">
                 01 NewAgeIT // 02 GeoWav // 03 ParkEase // 04 Aether // 05 NoteStack
               </span>

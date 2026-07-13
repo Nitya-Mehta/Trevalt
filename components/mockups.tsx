@@ -31,7 +31,7 @@ export function Mockup({ type, label, imageSrc, imageAlt }: MockupProps) {
                   </div>
                   <div className="space-y-1 text-ink lowercase">
                     <p>&gt; initializing BLE handshake...</p>
-                    <p>&gt; loading local DB enclaves...</p>
+                    <p>&gt; loading database...</p>
                     <p>&gt; routing multi-hop mesh: OK</p>
                     <p>&gt; security handshake: ACTIVE</p>
                   </div>
@@ -94,7 +94,7 @@ export function Mockup({ type, label, imageSrc, imageAlt }: MockupProps) {
                     <span>10.0.12.98</span>
                   </div>
                   <div className="space-y-1 text-ink text-[0.55rem] lowercase leading-relaxed">
-                    <p className="text-muted uppercase font-bold tracking-widest text-[0.5rem] mt-2">[sys_logs]</p>
+                    <p className="text-muted uppercase font-bold tracking-widest text-[0.5rem] mt-2">[system_logs]</p>
                     <p>&gt; cargo build --release --target wasm32</p>
                     <p className="text-accent">&gt; compiling rust decoders... done</p>
                     <p>&gt; listening on WebRTC data channels</p>

@@ -13,7 +13,7 @@ function SubmitButton() {
       disabled={pending}
       className="w-full justify-center rounded-xl border border-accent bg-accent py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {pending ? 'Authenticating...' : 'Authenticate'}
+      {pending ? 'Logging in...' : 'Log in'}
     </button>
   );
 }
@@ -31,10 +31,10 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
           
           <div className="text-center">
             <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent block mb-4">
-              [SYSTEM_AUTH // LOGIN]
+              [LOGIN]
             </span>
             <h1 className="font-display text-4xl font-bold tracking-display md:text-5xl">
-              Access Terminal
+              Admin Portal
             </h1>
           </div>
 
@@ -48,21 +48,21 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
               )}
 
               <div className="grid gap-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_EMAIL]</label>
+                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[EMAIL ADDRESS]</label>
                 <input
                   required
                   name="email"
                   type="email"
-                  placeholder="agent@enclave.com"
+                  placeholder="hello@example.com"
                   className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
                 />
               </div>
 
               <div className="grid gap-2">
                 <div className="flex justify-between items-center">
-                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_CREDENTIAL]</label>
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PASSWORD]</label>
                   <Link href="/forgot-password" className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-accent hover:underline">
-                    Reset Protocol
+                    Forgot Password
                   </Link>
                 </div>
                 <input

@@ -41,7 +41,7 @@ export function AddMaterialForm() {
       {isFormOpen && (
         <div className="border border-border bg-card/25 p-6 rounded-sm mb-8">
           <span className="block font-mono text-[0.65rem] uppercase tracking-[0.2em] text-accent mb-6">
-            [STORE_NEW_RESOURCE]
+            [ADD NEW RESOURCE]
           </span>
           <form action={formAction} className="grid gap-6">
             {state?.success && (
@@ -57,7 +57,7 @@ export function AddMaterialForm() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="grid gap-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_NAME]</label>
+                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[NAME]</label>
                 <input
                   required
                   name="name"
@@ -67,7 +67,7 @@ export function AddMaterialForm() {
               </div>
 
               <div className="grid gap-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_CATEGORY]</label>
+                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[CATEGORY]</label>
                 <input
                   required
                   name="category"
@@ -77,7 +77,7 @@ export function AddMaterialForm() {
               </div>
 
               <div className="grid gap-2 md:col-span-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_URL]</label>
+                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[URL]</label>
                 <input
                   required
                   name="url"
@@ -88,7 +88,7 @@ export function AddMaterialForm() {
               </div>
 
               <div className="grid gap-2 md:col-span-2">
-                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_DESC_OPTIONAL]</label>
+                <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[OPTIONAL DESCRIPTION]</label>
                 <textarea
                   name="description"
                   placeholder="Optional brief description about what this is for..."

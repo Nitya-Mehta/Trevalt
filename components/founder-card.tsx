@@ -222,7 +222,7 @@ function backSvg(founder: Founder) {
       <!-- RIGHT COLUMN -->
       <g transform="translate(680, 0)">
         <!-- Section label -->
-        <text x="0" y="96" fill="${BACK_TEXT}" fill-opacity="0.4" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">[TELEMETRY_CONTACT_PARAMS]</text>
+        <text x="0" y="96" fill="${BACK_TEXT}" fill-opacity="0.4" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">[CONTACT DETAILS]</text>
         
         <!-- Email -->
         <text x="0" y="160" fill="${BACK_TEXT}" fill-opacity="0.3" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1">SYS_EMAIL</text>
@@ -242,7 +242,7 @@ function backSvg(founder: Founder) {
           ${founder.playstore ? `
           <text x="20" y="95" fill="${BACK_TEXT}" fill-opacity="0.72" font-family="JetBrains Mono, monospace" font-size="14">&gt; PLAY_STORE: DEV_ID_${founder.playstore.substring(0, 7)}...</text>
           ` : `
-          <text x="20" y="95" fill="${BACK_TEXT}" fill-opacity="0.72" font-family="JetBrains Mono, monospace" font-size="14">&gt; SYS_NET: LOCAL_ENCLAVE_ONLINE</text>
+          <text x="20" y="95" fill="${BACK_TEXT}" fill-opacity="0.72" font-family="JetBrains Mono, monospace" font-size="14">&gt; STATUS: ONLINE</text>
           `}
           <text x="20" y="125" fill="${BACK_TEXT}" fill-opacity="0.4" font-family="JetBrains Mono, monospace" font-size="12">&gt; LOC: ${loc}</text>
         </g>

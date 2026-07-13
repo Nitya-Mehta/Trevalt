@@ -16,7 +16,7 @@ function SubmitButton() {
       disabled={pending}
       className="w-full justify-center rounded-xl border border-accent bg-accent py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {pending ? 'Transmitting...' : 'Transmit brief'}
+      {pending ? 'Sending...' : 'Send Message'}
     </button>
   );
 }
@@ -33,13 +33,13 @@ export default function ContactPage() {
           <div className="flex flex-col justify-between gap-10">
             <div>
               <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent">
-                [SYSTEM_HANDSHAKE // INTAKE]
+                [START A PROJECT]
               </span>
               <h1 className="mt-3 font-display text-5xl font-bold tracking-display md:text-7xl">
-                Initialize the briefing.
+                Tell us what you&apos;re building.
               </h1>
               <p className="mt-6 text-base leading-7 text-muted md:text-lg">
-                Let us know what you are building. Once submitted, we will review the parameters and configure a private Slack enclave within 24 hours to kick off scope mapping.
+                Let us know what you are building. Once submitted, we will review the details and set up a private Slack channel within 24 hours to kick off the project.
               </p>
             </div>
 
@@ -56,7 +56,7 @@ export default function ContactPage() {
                 />
               </div>
               <div className="absolute top-2.5 left-2.5 bg-[#080706]/85 backdrop-blur-sm px-2 py-0.5 rounded font-mono text-[0.55rem] tracking-wider text-accent border border-border/50 uppercase">
-                [SYS_INTAKE // MASCOT_SELFIE]
+                [MASCOT SELFIE]
               </div>
               {/* Blueprint Corner Crosshairs */}
               <div className="absolute inset-2 border border-accent/15 pointer-events-none rounded-[4px]">
@@ -69,7 +69,7 @@ export default function ContactPage() {
 
             <div className="space-y-8 border-t border-border pt-8 font-mono text-[0.7rem] uppercase tracking-[0.18em]">
               <div>
-                <span className="text-accent">[SYS_INTAKE_SLA]</span>
+                <span className="text-accent">[RESPONSE TIMES]</span>
                 <div className="mt-4 space-y-2 text-ink">
                   <div className="flex justify-between border-b border-border/40 pb-1">
                     <span>RESPONSE LATENCY</span>
@@ -109,12 +109,12 @@ export default function ContactPage() {
           {/* Right Column - Intake Form */}
           <div className="border border-border bg-card/25 p-6 md:p-8">
             <span className="font-mono text-[0.65rem] tracking-[0.2em] text-accent uppercase block mb-6">
-              [INTAKE_PARAMS_FORM]
+              [PROJECT DETAILS]
             </span>
             
             {state?.success ? (
               <div className="rounded-xl border border-accent/50 bg-accent/10 p-6 text-center text-accent">
-                <p className="font-mono text-sm uppercase tracking-widest mb-2">[TRANSMISSION_SUCCESS]</p>
+                <p className="font-mono text-sm uppercase tracking-widest mb-2">[SUCCESS]</p>
                 <p className="text-sm">Your brief has been received. We will initiate contact within 24 hours.</p>
               </div>
             ) : (
@@ -128,7 +128,7 @@ export default function ContactPage() {
                   </div>
                 )}
                 <div className="grid gap-2">
-                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_CLIENT_NAME]</label>
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[YOUR NAME]</label>
                   <input
                     required
                     name="name"
@@ -138,18 +138,18 @@ export default function ContactPage() {
                 </div>
 
                 <div className="grid gap-2">
-                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_CLIENT_EMAIL]</label>
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[EMAIL ADDRESS]</label>
                   <input
                     required
                     name="email"
                     type="email"
-                    placeholder="client@enclave.com"
+                    placeholder="hello@example.com"
                     className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
                   />
                 </div>
 
                 <div className="grid gap-2">
-                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_PROJECT_TYPE]</label>
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PROJECT TYPE]</label>
                   <select
                     required
                     name="project_type"
@@ -168,7 +168,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="grid gap-2">
-                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_BUDGET_RANGE]</label>
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[BUDGET RANGE]</label>
                   <select
                     required
                     name="budget_range"
@@ -187,7 +187,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="grid gap-2">
-                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PARAM_BRIEF_PAYLOAD]</label>
+                  <label className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted">[PROJECT DESCRIPTION]</label>
                   <textarea
                     required
                     name="message"

@@ -73,7 +73,7 @@ export default function AboutPage() {
                       />
                       {/* Tech feed overlay tag */}
                       <div className="absolute top-2.5 left-2.5 bg-[#080706]/85 backdrop-blur-sm px-2 py-0.5 rounded font-mono text-[0.55rem] tracking-wider text-accent border border-border/50 uppercase">
-                        [SYS_CAPT // NIT-09]
+                        [FOUNDER PORTRAIT]
                       </div>
                       {/* Blueprint Corner Crosshairs */}
                       <div className="absolute inset-2 border border-accent/20 pointer-events-none rounded-[4px]">
