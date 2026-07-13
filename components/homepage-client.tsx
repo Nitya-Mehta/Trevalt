@@ -274,7 +274,7 @@ export function HomepageClient() {
               <span>01 / 05 // CASE STUDY</span>
             </div>
             <Link href={`/projects/${majorProjects[0].slug}`} className="group/title block w-fit">
-              <div data-project-title className="font-display text-5xl font-bold tracking-display transition-colors duration-200 group-hover/title:text-accent md:text-7xl">
+              <div data-project-title className="font-display text-4xl font-bold tracking-display transition-colors duration-200 group-hover/title:text-accent md:text-5xl lg:text-7xl">
                 {majorProjects[0].title}
               </div>
             </Link>
@@ -349,7 +349,7 @@ export function HomepageClient() {
               <span>02 / 05 // CASE STUDY</span>
             </div>
             <Link href={`/projects/${majorProjects[1].slug}`} className="group/title block w-fit">
-              <div data-project-title className="font-display text-5xl font-bold tracking-display transition-colors duration-200 group-hover/title:text-accent md:text-7xl">
+              <div data-project-title className="font-display text-4xl font-bold tracking-display transition-colors duration-200 group-hover/title:text-accent md:text-5xl lg:text-7xl">
                 {majorProjects[1].title}
               </div>
             </Link>
@@ -393,7 +393,7 @@ export function HomepageClient() {
       <section ref={minorRef} className="relative overflow-hidden border-b border-border bg-paper bg-[linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] bg-[size:40px_40px]">
         <div ref={minorConstraintsRef} className="relative mx-auto w-full max-w-[var(--page-max)] px-5 py-16 md:px-8 md:py-24 md:min-h-[750px]">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between border-b border-border md:border-none pb-8 md:pb-0 pointer-events-none relative z-10">
-            <h2 className="max-w-[32rem] font-display text-4xl font-bold tracking-display md:text-5xl bg-paper/80 backdrop-blur-sm p-2 -ml-2 rounded-lg">
+            <h2 className="max-w-[32rem] font-display text-3xl font-bold tracking-display md:text-4xl lg:text-5xl bg-paper/80 backdrop-blur-sm p-2 -ml-2 rounded-lg">
               More projects.
             </h2>
             <div className="mt-4 md:mt-0 bg-paper/80 backdrop-blur-sm p-2 rounded-lg">
@@ -468,7 +468,7 @@ export function HomepageClient() {
             <div className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-accent">
               [START A PROJECT]
             </div>
-            <h2 data-closing-copy className="max-w-[32rem] font-display text-5xl font-bold leading-[0.95] tracking-display md:text-7xl">
+            <h2 data-closing-copy className="max-w-[32rem] font-display text-4xl font-bold leading-[0.95] tracking-display md:text-5xl lg:text-7xl">
               Ready when the content is.
             </h2>
             <Link

@@ -8,7 +8,7 @@ export default function ProjectsIndexPage() {
     <SiteShell>
       <section className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-16">
         <div className="max-w-[30rem]">
-          <h1 className="font-display text-5xl font-bold tracking-display md:text-6xl">Projects</h1>
+          <h1 className="font-display text-4xl font-bold tracking-display md:text-5xl lg:text-6xl">Projects</h1>
           <p className="mt-4 text-muted">Full-width project rows, with GeoWav now filled in as the first real case study.</p>
         </div>
 

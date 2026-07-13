@@ -14,7 +14,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-paper text-ink">
       <LoadingReveal />
       <header className="border-b border-border/100">
-        <div className="mx-auto flex max-w-[var(--page-max)] items-center justify-between px-5 py-4 md:px-8">
+        <div className="mx-auto flex flex-col md:flex-row max-w-[var(--page-max)] items-start md:items-center justify-between gap-5 md:gap-0 px-5 py-5 md:px-8">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative w-7 h-7 overflow-hidden rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
               <Image
@@ -101,7 +101,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="mt-8 border-t border-border/80 pt-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between font-mono text-[0.62rem] uppercase tracking-[0.16em] text-muted">
-            <span>© {new Date().getFullYear()} TREVALT STUDIO. ALL RIGHTS RESERVED.</span>
+            <div className="flex flex-col md:flex-row md:gap-4 md:items-center">
+              <span>© {new Date().getFullYear()} TREVALT STUDIO. ALL RIGHTS RESERVED.</span>
+              <span className="hidden md:inline-block text-border/80">|</span>
+              <span className="text-accent mt-1 md:mt-0">DEVELOPED BY TREVALT</span>
+            </div>
             <span>BUILT TO STAY LEAN, READABLE, AND DEPLOYABLE.</span>
           </div>
         </div>

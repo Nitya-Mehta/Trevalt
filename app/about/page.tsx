@@ -18,7 +18,7 @@ export default function AboutPage() {
             <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent">
               [STUDIO_ENGINEERS // CREDENTIALS]
             </span>
-            <h1 className="mt-3 font-display text-5xl font-bold tracking-display md:text-7xl">
+            <h1 className="mt-3 font-display text-4xl font-bold tracking-display md:text-5xl lg:text-7xl">
               Engineers. No accounts.
             </h1>
             <p className="mt-6 max-w-[38rem] text-base leading-7 text-muted md:text-lg">

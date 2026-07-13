@@ -3,11 +3,11 @@ import { HomepageClient } from '@/components/homepage-client';
 import { SiteShell } from '@/components/site-shell';
 
 export const metadata: Metadata = {
-  title: 'Trevalt | Elite Web Development, AI, ML & Android Apps',
-  description: 'Trevalt builds robust Android applications, custom AI/ML pipelines, and high-performance web platforms. Partner with an elite engineering studio.',
+  title: 'Trevalt | Web Dev, AI/ML & Android',
+  description: 'Trevalt builds robust Android applications, custom AI/ML pipelines, and high-performance web platforms. Partner with a software engineering studio.',
   openGraph: {
-    title: 'Trevalt | Elite Web Development, AI, ML & Android Apps',
-    description: 'Trevalt builds robust Android applications, custom AI/ML pipelines, and high-performance web platforms. Partner with an elite engineering studio.',
+    title: 'Trevalt | Web Dev, AI/ML & Android',
+    description: 'Trevalt builds robust Android applications, custom AI/ML pipelines, and high-performance web platforms. Partner with a software engineering studio.',
   }
 };
 
@@ -17,7 +17,7 @@ export default function HomePage() {
     "@type": "ProfessionalService",
     "name": "Trevalt",
     "image": "https://trevalt.vercel.app/images/og-image.jpg",
-    "description": "Elite engineering studio specializing in high-performance web development, AI, ML, and robust Android applications.",
+    "description": "Software engineering studio specializing in high-performance web development, AI, ML, and robust Android applications.",
     "url": "https://trevalt.vercel.app",
     "founders": [
       {

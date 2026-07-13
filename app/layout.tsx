@@ -4,13 +4,19 @@ import '@fontsource/space-grotesk/700.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/fraunces/900.css';
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://trevalt.vercel.app'),
   title: {
-    default: 'Trevalt | Elite Web Dev, AI/ML & Android App Development',
+    default: 'Trevalt | Web Dev, AI/ML & Android',
     template: '%s | Trevalt',
   },
-  description: 'Trevalt is an elite engineering studio specializing in high-performance web development, artificial intelligence (AI), machine learning (ML), and robust Android applications. Founded by Nitya Mehta, Aarav Halvadiya, and Devanshu Verma.',
+  description: 'Trevalt is a software engineering studio specializing in high-performance web development, artificial intelligence (AI), machine learning (ML), and robust Android applications. Founded by Nitya Mehta, Aarav Halvadiya, and Devanshu Verma.',
   keywords: [
     'Trevalt',
     'Web Development Agency',
@@ -44,15 +50,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://trevalt.vercel.app',
-    title: 'Trevalt | Elite Web Dev, AI/ML & Android App Development',
-    description: 'Elite engineering studio specializing in high-performance web development, AI, ML, and robust Android applications.',
+    title: 'Trevalt | Web Dev, AI/ML & Android',
+    description: 'Software engineering studio specializing in high-performance web development, AI, ML, and robust Android applications.',
     siteName: 'Trevalt',
     images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Trevalt Studio' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Trevalt | Elite Web Dev, AI/ML & Android App Development',
-    description: 'Elite engineering studio specializing in high-performance web development, AI, ML, and robust Android applications.',
+    title: 'Trevalt | Web Dev, AI/ML & Android',
+    description: 'Software engineering studio specializing in high-performance web development, AI, ML, and robust Android applications.',
     images: ['/images/og-image.jpg'],
   },
   robots: {

@@ -66,7 +66,7 @@ export default function ContactPage() {
                 <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent">
                   [START A PROJECT]
                 </span>
-                <h1 className="mt-3 font-display text-5xl font-bold tracking-display md:text-7xl">
+                <h1 className="mt-3 font-display text-4xl font-bold tracking-display md:text-5xl lg:text-7xl">
                   Tell us what you&apos;re building.
                 </h1>
                 <p className="mt-6 text-base leading-7 text-muted md:text-lg">

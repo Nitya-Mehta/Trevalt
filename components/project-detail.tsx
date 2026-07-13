@@ -12,10 +12,20 @@ export function ProjectDetail({ project }: { project: Project }) {
   return (
     <section className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-16">
       <div className="max-w-[46rem]">
+        {project.thumbnail ? (
+          <div className="relative h-20 w-20 mb-6 overflow-hidden rounded-2xl border border-border bg-[#080706] flex items-center justify-center shadow-md">
+            <Image
+              src={project.thumbnail}
+              alt={`${project.title} logo`}
+              fill
+              className="object-contain p-3"
+            />
+          </div>
+        ) : null}
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.2em] text-muted">
           {project.category ?? 'Case study'}
         </p>
-        <h1 className="mt-4 font-display text-5xl font-bold tracking-display md:text-7xl">{project.title}</h1>
+        <h1 className="mt-4 font-display text-4xl font-bold tracking-display md:text-5xl lg:text-7xl">{project.title}</h1>
         <p className="mt-5 max-w-[42rem] text-lg text-muted">{project.tagline}</p>
         {project.developer ? (
           <p className="mt-3 font-mono text-[0.75rem] uppercase tracking-[0.18em] text-muted">
@@ -27,7 +37,7 @@ export function ProjectDetail({ project }: { project: Project }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="mt-12"
       >
@@ -128,7 +138,7 @@ export function ProjectDetail({ project }: { project: Project }) {
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="border border-border bg-card p-6"
         >

@@ -47,6 +47,7 @@ export const projects: Project[] = [
       'Dynamic WebRTC Topology — client devices handshake directly with edge nodes to minimize network transit overhead',
       'Stateless Auth & Config — local-first sessions secured with ephemeral ECDSA signatures',
     ],
+    thumbnail: '/projects/newageit/logo.png',
   },
   {
     slug: 'geowav',
@@ -82,6 +83,7 @@ export const projects: Project[] = [
       '/projects/geowav/05-route.png',
       '/projects/geowav/01-home.png',
     ],
+    thumbnail: '/projects/geowav/logo.png',
   },
   {
     slug: 'parkease',
@@ -109,6 +111,7 @@ export const projects: Project[] = [
       'Pass/subscription flow with Razorpay checkout',
       'Area-based dashboards and admin scoping',
     ],
+    thumbnail: '/projects/parkease/logo.svg',
   },
   {
     slug: 'sparkline',
@@ -134,7 +137,8 @@ export const projects: Project[] = [
       'Brochure request handling',
       'Gallery and inventory management',
       'Role-based access control (RBAC)'
-    ]
+    ],
+    thumbnail: '/projects/sparkline/logo.png',
   },
   {
     slug: 'notestack',
@@ -158,7 +162,7 @@ export const projects: Project[] = [
       'Light and dark mode',
       'Backup/restore support',
     ],
-    thumbnail: '/projects/notestack/01-home.png',
+    thumbnail: '/projects/notestack/logo.png',
     screenshots: [
       '/projects/notestack/01-home.png',
       '/projects/notestack/02-new-note.png',
