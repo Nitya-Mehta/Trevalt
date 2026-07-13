@@ -5,9 +5,10 @@ type MockupProps = {
   label: string;
   imageSrc?: string;
   imageAlt?: string;
+  priority?: boolean;
 };
 
-export function Mockup({ type, label, imageSrc, imageAlt }: MockupProps) {
+export function Mockup({ type, label, imageSrc, imageAlt, priority = false }: MockupProps) {
   if (type === 'phone') {
     return (
       <div className="phone-frame relative mx-auto w-full max-w-[300px] rounded-[2rem] border border-border bg-card p-3">
@@ -21,6 +22,7 @@ export function Mockup({ type, label, imageSrc, imageAlt }: MockupProps) {
                 fill
                 sizes="280px"
                 className="object-cover object-top"
+                priority={priority}
               />
             ) : (
               <div className="h-full bg-paper p-4 font-mono text-[0.55rem] uppercase tracking-[0.1em] text-muted flex flex-col justify-between">
@@ -66,7 +68,7 @@ export function Mockup({ type, label, imageSrc, imageAlt }: MockupProps) {
         <div className="border-b border-white/10 px-4 py-3 text-[0.7rem] font-mono uppercase tracking-[0.2em] text-muted">{label}</div>
         <div className="relative aspect-[16/9] bg-paper">
           {imageSrc ? (
-            <Image src={imageSrc} alt={imageAlt ?? label} fill sizes="760px" className="object-cover object-top" />
+            <Image src={imageSrc} alt={imageAlt ?? label} fill sizes="760px" className="object-cover object-top" priority={priority} />
           ) : (
             <div className="h-full bg-paper p-5 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-muted grid grid-cols-[140px_1fr] divide-x divide-border">
               <div className="pr-4 space-y-4">

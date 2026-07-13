@@ -1,4 +1,13 @@
 import { SiteShell } from '@/components/site-shell';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms & Conditions | Trevalt',
+  description: 'Terms of service, payment terms, and working agreements for Trevalt software engineering projects.',
+  alternates: {
+    canonical: 'https://trevalt.vercel.app/terms',
+  }
+};
 
 const serviceSections = [
   {

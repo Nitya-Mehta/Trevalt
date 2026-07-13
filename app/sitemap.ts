@@ -1,7 +1,15 @@
 import { MetadataRoute } from 'next';
+import { projects } from '@/lib/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://trevalt.vercel.app';
+
+  const projectRoutes = projects.map((project) => ({
+    url: `${baseUrl}/projects/${project.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
 
   return [
     {
@@ -28,5 +36,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
+    ...projectRoutes,
   ];
 }

@@ -12,6 +12,9 @@ export const viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://trevalt.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: 'Trevalt | Web Dev, AI/ML & Android',
     template: '%s | Trevalt',
@@ -81,6 +84,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Trevalt",
+              "url": "https://trevalt.vercel.app",
+              "logo": "https://trevalt.vercel.app/icon.png",
+              "founders": [
+                { "@type": "Person", "name": "Nitya Mehta" },
+                { "@type": "Person", "name": "Aarav Halvadiya" },
+                { "@type": "Person", "name": "Devanshu Verma" }
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "nityachintan@gmail.com",
+                "contactType": "customer support"
+              }
+            })
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

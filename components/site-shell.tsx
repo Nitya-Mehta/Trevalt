@@ -23,6 +23,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 width={28}
                 height={28}
                 className="object-contain"
+                priority
               />
             </div>
             <span className="font-display text-sm uppercase tracking-[0.24em] text-ink transition-colors duration-200 group-hover:text-accent">

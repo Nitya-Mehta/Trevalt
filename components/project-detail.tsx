@@ -56,6 +56,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                       fill
                       sizes="(max-width: 1024px) 100vw, 420px"
                       className="object-cover object-top"
+                      priority
                     />
                   </div>
                 </div>

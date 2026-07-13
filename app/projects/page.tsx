@@ -2,6 +2,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SiteShell } from '@/components/site-shell';
 import { projects } from '@/lib/projects';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Projects & Case Studies | Trevalt',
+  description: "Explore Trevalt's portfolio of high-performance web platforms, custom AI/ML pipelines, and robust Android applications.",
+  alternates: {
+    canonical: 'https://trevalt.vercel.app/projects',
+  },
+  openGraph: {
+    title: 'Projects & Case Studies | Trevalt',
+    description: "Explore Trevalt's portfolio of high-performance web platforms, custom AI/ML pipelines, and robust Android applications.",
+    url: 'https://trevalt.vercel.app/projects',
+  }
+};
 
 export default function ProjectsIndexPage() {
   return (
@@ -9,7 +23,7 @@ export default function ProjectsIndexPage() {
       <section className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-16">
         <div className="max-w-[30rem]">
           <h1 className="font-display text-4xl font-bold tracking-display md:text-5xl lg:text-6xl">Projects</h1>
-          <p className="mt-4 text-muted">Full-width project rows, with GeoWav now filled in as the first real case study.</p>
+          <p className="mt-4 text-muted">Explore our portfolio of high-performance web platforms, custom AI/ML pipelines, and robust Android applications.</p>
         </div>
 
         <div className="mt-12 border-b border-border">
