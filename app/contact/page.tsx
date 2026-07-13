@@ -1,12 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { SiteShell } from '@/components/site-shell';
 import { useFormState, useFormStatus } from 'react-dom';
 import { submitContactForm } from '@/app/actions/contact';
+import { motion } from 'framer-motion';
 
 const projectTypes = ['Brand site', 'Product website', 'Case study refresh', 'Android app', 'Other'];
-const budgetRanges = ['Under $5k', '$5k-$15k', '$15k-$30k', '$30k+'];
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -23,6 +24,31 @@ function SubmitButton() {
 
 export default function ContactPage() {
   const [state, formAction] = useFormState(submitContactForm, null);
+  const [budgetRanges, setBudgetRanges] = useState([
+    'Under $1.5k',
+    '$1.5k - $10k',
+    '$10k - $30k',
+    '$30k+'
+  ]);
+
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.currency === 'INR') {
+          setBudgetRanges(['Under ₹30,000', '₹30,000 - ₹1 Lakh', '₹1 Lakh - ₹5 Lakhs', '₹5 Lakhs+']);
+        } else if (data.currency === 'EUR') {
+          setBudgetRanges(['Under €500', '€500 - €3,000', '€3,000 - €10,000', '€10,000+']);
+        } else if (data.currency === 'GBP') {
+          setBudgetRanges(['Under £500', '£500 - £3,000', '£3,000 - £10,000', '£10,000+']);
+        } else if (data.currency === 'AUD') {
+          setBudgetRanges(['Under A$1.5k', 'A$1.5k - A$10k', 'A$10k - A$30k', 'A$30k+']);
+        } else if (data.currency === 'CAD') {
+          setBudgetRanges(['Under C$2k', 'C$2k - C$10k', 'C$10k - C$35k', 'C$35k+']);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <SiteShell>
@@ -30,42 +56,23 @@ export default function ContactPage() {
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           
           {/* Left Column - System Briefing Details */}
-          <div className="flex flex-col justify-between gap-10">
-            <div>
-              <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent">
-                [START A PROJECT]
-              </span>
-              <h1 className="mt-3 font-display text-5xl font-bold tracking-display md:text-7xl">
-                Tell us what you&apos;re building.
-              </h1>
-              <p className="mt-6 text-base leading-7 text-muted md:text-lg">
-                Let us know what you are building. Once submitted, we will review the details and set up a private Slack channel within 24 hours to kick off the project.
-              </p>
-            </div>
-
-            {/* Mascot Selfie Banner */}
-            <div className="relative w-full aspect-[2/1] rounded-[6px] overflow-hidden border border-border bg-card flex items-center justify-center p-4 group">
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,85,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,85,0,0.02)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-              <div className="relative w-[130px] h-[130px] transition-transform duration-300 group-hover:scale-105">
-                <Image
-                  src="/images/mascot/selfie.png"
-                  alt="Trevalt Selfie Mascot"
-                  fill
-                  sizes="130px"
-                  className="object-contain"
-                />
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="flex flex-col justify-between gap-10"
+            >
+              <div>
+                <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent">
+                  [START A PROJECT]
+                </span>
+                <h1 className="mt-3 font-display text-5xl font-bold tracking-display md:text-7xl">
+                  Tell us what you&apos;re building.
+                </h1>
+                <p className="mt-6 text-base leading-7 text-muted md:text-lg">
+                  Let us know what you are building. Once submitted, we will review the details and set up a private Slack channel within 24 hours to kick off the project.
+                </p>
               </div>
-              <div className="absolute top-2.5 left-2.5 bg-[#080706]/85 backdrop-blur-sm px-2 py-0.5 rounded font-mono text-[0.55rem] tracking-wider text-accent border border-border/50 uppercase">
-                [MASCOT SELFIE]
-              </div>
-              {/* Blueprint Corner Crosshairs */}
-              <div className="absolute inset-2 border border-accent/15 pointer-events-none rounded-[4px]">
-                <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-accent/50" />
-                <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-accent/50" />
-                <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-accent/50" />
-                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-accent/50" />
-              </div>
-            </div>
 
             <div className="space-y-8 border-t border-border pt-8 font-mono text-[0.7rem] uppercase tracking-[0.18em]">
               <div>
@@ -104,10 +111,15 @@ export default function ContactPage() {
                 </ul>
               </div>
             </div>
-          </div>
+            </motion.div>
 
-          {/* Right Column - Intake Form */}
-          <div className="border border-border bg-card/25 p-6 md:p-8">
+          {/* Right Column - Contact Form */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+            className="rounded-2xl border border-border bg-card p-6 md:p-10"
+          >
             <span className="font-mono text-[0.65rem] tracking-[0.2em] text-accent uppercase block mb-6">
               [PROJECT DETAILS]
             </span>
@@ -132,7 +144,7 @@ export default function ContactPage() {
                   <input
                     required
                     name="name"
-                    placeholder="Nitya Mehta"
+                    placeholder="Potential client's name"
                     className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
                   />
                 </div>
@@ -191,7 +203,7 @@ export default function ContactPage() {
                   <textarea
                     required
                     name="message"
-                    placeholder="Provide scope parameters, API targets, and engineering constraints..."
+                    placeholder="Tell us all the details about the project you want us to build..."
                     rows={5}
                     className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent resize-none"
                   />
@@ -200,7 +212,7 @@ export default function ContactPage() {
                 <SubmitButton />
               </form>
             )}
-          </div>
+          </motion.div>
           
         </div>
       </section>

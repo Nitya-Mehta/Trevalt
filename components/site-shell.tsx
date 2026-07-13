@@ -89,10 +89,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <div>
                 <span className="block text-accent font-bold">[CONNECTED_CHANNELS]</span>
                 <div className="mt-3 text-ink">
-                  <p className="flex justify-between border-b border-border/40 pb-1">
-                    <span>EMAIL</span>
-                    <a href="mailto:hello@trevalt.com" className="hover:text-accent transition-colors duration-200">hello@trevalt.com</a>
-                  </p>
+                  <div className="flex flex-col border-b border-border/40 pb-2">
+                    <span className="mb-1">EMAILS</span>
+                    <a href="mailto:nityachintan@gmail.com" className="hover:text-accent transition-colors duration-200 lowercase tracking-normal font-sans">nityachintan@gmail.com</a>
+                    <a href="mailto:aaravhalvadiya@gmail.com" className="hover:text-accent transition-colors duration-200 lowercase tracking-normal font-sans mt-0.5">aaravhalvadiya@gmail.com</a>
+                    <a href="mailto:devanshuverma72@gmail.com" className="hover:text-accent transition-colors duration-200 lowercase tracking-normal font-sans mt-0.5">devanshuverma72@gmail.com</a>
+                  </div>
                 </div>
               </div>
             </div>

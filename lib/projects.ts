@@ -111,25 +111,29 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'project-four',
-    title: 'Aether',
-    tagline: 'A local-first encrypted mesh communication protocol for Android.',
+    slug: 'sparkline',
+    title: 'Sparkline',
+    tagline: 'Construction Machinery Catalog & Inquiry Platform.',
     description:
-      'Aether enables peer-to-peer message exchanges without cellular coverage, utilizing local Wi-Fi Direct and Bluetooth Low Energy networks.',
+      'Developed a full-stack web platform for managing construction machinery catalogs, customer inquiries, brochures, and administrative operations. Implemented secure authentication, product management workflows, inquiry handling, and role-based access controls.',
     tier: 'minor',
-    mockupType: 'none',
-    tech: ['Kotlin', 'BLE Mesh', 'Protobuf', 'Noise Protocol'],
-    category: 'Mobile Security',
-    developer: 'Aarav Halvadiya',
+    mockupType: 'laptop',
+    tech: ['React.js', 'Express.js', 'MySQL', 'Node.js'],
+    category: 'Full-Stack Development',
+    developer: 'Devanshu Verma',
     story:
-      'Aether addresses communication needs in remote or compromised environments. By building a custom mesh routing protocol atop the Noise Protocol Framework, we enabled secure, end-to-end encrypted chats over multi-hop local channels.',
+      'Sparkline required a scalable frontend and backend system with database integration for efficient business operations. We built a robust platform allowing customers to view product catalogs and request quotes, while admins can manage inventory and inquiries via role-based access controls.',
     links: [
-      { label: 'Mesh Protocol Specs', href: 'https://github.com/trevalt-studio/aether-mesh' }
+      { label: 'Live site', href: 'https://www.sparklineindia.com/' }
     ],
     features: [
-      'Multi-Hop Routing — messages are securely relayed through intermediate peers to reach targets',
-      'Noise Protocol Encryption — cryptographic handshakes and message streams are fully authenticated and secure',
-      'Zero-Telemetry Storage — messages are stored locally in secure sqlite enclaves',
+      'Product catalog management',
+      'Customer inquiry and quotation system',
+      'User authentication and password recovery',
+      'Admin dashboard and user management',
+      'Brochure request handling',
+      'Gallery and inventory management',
+      'Role-based access control (RBAC)'
     ]
   },
   {

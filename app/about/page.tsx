@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { SiteShell } from '@/components/site-shell';
 import { FounderCard } from '@/components/founder-card';
 import { founders } from '@/lib/founders';

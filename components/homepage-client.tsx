@@ -209,6 +209,15 @@ export function HomepageClient() {
                     We&apos;re the ones who write it.
                   </span>
                 </h1>
+                <div className="mt-8">
+                  <Link
+                    href="/contact"
+                    className="inline-flex w-fit items-center rounded-xl border border-accent bg-accent px-6 py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.02]"
+                  >
+                    Get in touch
+                    <ArrowUpRightIcon />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -474,13 +483,17 @@ export function HomepageClient() {
           <div className="grid gap-8 border-t border-border pt-8 md:border-t-0 md:pt-0 font-mono text-[0.72rem] uppercase tracking-[0.18em]">
             <div className="grid gap-2 border-b border-border/60 pb-4">
               <span className="text-accent">DIRECT DIRECTORY</span>
-              <span className="text-base text-ink lowercase tracking-normal font-sans font-medium">hello@trevalt.com</span>
+              <div className="grid gap-1">
+                <span className="text-[0.95rem] text-ink lowercase tracking-normal font-sans font-medium">nityachintan@gmail.com</span>
+                <span className="text-[0.95rem] text-ink lowercase tracking-normal font-sans font-medium">aaravhalvadiya@gmail.com</span>
+                <span className="text-[0.95rem] text-ink lowercase tracking-normal font-sans font-medium">devanshuverma72@gmail.com</span>
+              </div>
             </div>
 
             <div className="grid gap-2 border-b border-border/60 pb-4">
               <span className="text-accent">PROJECT PORTFOLIO</span>
               <span className="text-sm text-muted leading-6">
-                01 NewAgeIT // 02 GeoWav // 03 ParkEase // 04 Aether // 05 NoteStack
+                01 NewAgeIT // 02 GeoWav // 03 ParkEase // 04 Sparkline // 05 NoteStack
               </span>
             </div>
 
