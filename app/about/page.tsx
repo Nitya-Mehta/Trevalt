@@ -9,7 +9,20 @@ import { founders } from '@/lib/founders';
 
 export default function AboutPage() {
   const [hoveredFounder, setHoveredFounder] = useState<string | null>(null);
-  const [isNityaFlipped, setIsNityaFlipped] = useState(false);
+  const [flippedStates, setFlippedStates] = useState<Record<number, boolean>>({});
+
+  const handleMouseEnter = (index: number) => {
+    setFlippedStates(prev => ({ ...prev, [index]: true }));
+  };
+
+  const handleMouseLeave = (index: number) => {
+    setFlippedStates(prev => ({ ...prev, [index]: false }));
+  };
+
+  const handleToggleFlip = (index: number) => {
+    setFlippedStates(prev => ({ ...prev, [index]: !prev[index] }));
+  };
+
   return (
     <SiteShell>
       <section className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-20">
@@ -29,7 +42,7 @@ export default function AboutPage() {
 
         {/* Founder cards section with asymmetric layouts */}
         <div className="mt-16 grid gap-8 lg:grid-cols-3">
-          {founders.map((founder) => {
+          {founders.map((founder, index) => {
             const isHovered = hoveredFounder === founder.name;
             const isAnyHovered = hoveredFounder !== null;
             const isDimmed = isAnyHovered && !isHovered;
@@ -46,82 +59,35 @@ export default function AboutPage() {
                   <span>[FOUNDER 0{founder.name.includes('Nitya') ? '1' : founder.name.includes('Aarav') ? '2' : '3'}]</span>
                   <span className="text-accent">{founder.role}</span>
                 </div>
-                {founder.name.includes('Nitya') ? (
-                  <>
-                    <div
-                      className="relative w-full aspect-[1.6/1] rounded-[6px] overflow-hidden border border-border/80 group cursor-pointer bg-card"
-                      onMouseEnter={() => setIsNityaFlipped(true)}
-                      onMouseLeave={() => setIsNityaFlipped(false)}
-                      onClick={() => setIsNityaFlipped(!isNityaFlipped)}
-                    >
-                      <Image
-                        src="/images/nitya.jpg"
-                        alt="Nitya Mehta"
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 33vw"
-                        priority
-                        className="object-cover object-center"
-                      />
-                      {/* Tech feed overlay tag */}
-                      <div className="absolute top-2.5 left-2.5 bg-[#080706]/85 backdrop-blur-sm px-2 py-0.5 rounded font-mono text-[0.55rem] tracking-wider text-accent border border-border/50 uppercase">
-                        [FOUNDER PORTRAIT]
-                      </div>
-                      {/* Blueprint Corner Crosshairs */}
-                      <div className="absolute inset-2 border border-accent/20 pointer-events-none rounded-[4px]">
-                        <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-accent" />
-                        <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-accent" />
-                        <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-accent" />
-                        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-accent" />
-                      </div>
-                    </div>
-                    {/* Schematic Connection Line */}
-                    <div className="flex flex-col items-center -my-2.5 z-0">
-                      <div className="w-[1px] h-7 bg-accent/60 border-dashed border-accent/30 border-l" />
-                      <div className="w-2 h-2 rounded-full bg-accent -mt-1" />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="relative w-full aspect-[1.6/1] rounded-[6px] overflow-hidden border border-border/80 bg-card group flex items-center justify-center p-4">
-                      {/* Subtle blueprint grid background inside the avatar slot */}
-                      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,85,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,85,0,0.03)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                      <div className="relative w-[110px] h-[110px] transition-transform duration-300 group-hover:scale-110">
-                        <Image
-                          src={founder.name.includes('Aarav') ? "/images/mascot/bear_08_cool.png" : "/images/mascot/bear_06_thinking.png"}
-                          alt={`${founder.name} Mascot`}
-                          fill
-                          sizes="110px"
-                          className="object-contain"
-                        />
-                      </div>
-                      {/* Tech feed overlay tag */}
-                      <div className="absolute top-2.5 left-2.5 bg-[#080706]/85 backdrop-blur-sm px-2 py-0.5 rounded font-mono text-[0.55rem] tracking-wider text-accent border border-border/50 uppercase">
-                        {founder.name.includes('Aarav') ? '[AVATAR // AAR-24]' : '[AVATAR // DEV-42]'}
-                      </div>
-                      {/* Blueprint Corner Crosshairs */}
-                      <div className="absolute inset-2 border border-accent/15 pointer-events-none rounded-[4px]">
-                        <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-accent/60" />
-                        <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-accent/60" />
-                        <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-accent/60" />
-                        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-accent/60" />
-                      </div>
-                    </div>
-                    {/* Schematic Connection Line */}
-                    <div className="flex flex-col items-center -my-2.5 z-0">
-                      <div className="w-[1px] h-7 bg-accent/60 border-dashed border-accent/30 border-l" />
-                      <div className="w-2 h-2 rounded-full bg-accent -mt-1" />
-                    </div>
-                  </>
-                )}
                 <div
-                  onMouseEnter={() => founder.name.includes('Nitya') && setIsNityaFlipped(true)}
-                  onMouseLeave={() => founder.name.includes('Nitya') && setIsNityaFlipped(false)}
-                  className="w-full"
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
+                  className="w-full relative mt-8 lg:mt-12"
                 >
+                  {/* Circular Portrait on Corner */}
+                  <div
+                    className={`absolute w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-[6px] border-[#080706] shadow-2xl z-40 bg-card flex items-center justify-center cursor-pointer transition-transform duration-500 hover:scale-110 hover:rotate-[8deg] ${
+                      index % 2 === 0 ? '-top-8 -right-4 md:-top-12 md:-right-8' : '-bottom-8 -right-4 md:-bottom-12 md:-right-8'
+                    }`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleToggleFlip(index);
+                    }}
+                  >
+                    <Image
+                      src={founder.name.includes('Nitya') ? "/images/nitya.jpg" : founder.name.includes('Aarav') ? "/images/aarav.jpg" : "/images/devanshu.jpg"}
+                      alt={founder.name}
+                      fill
+                      sizes="128px"
+                      className="transition-all duration-700 ease-out object-cover filter saturate-[0.85] contrast-[1.1] hover:saturate-100"
+                    />
+                  </div>
+
+                  {/* Business Card */}
                   <FounderCard
                     founder={founder}
-                    isFlipped={founder.name.includes('Nitya') ? isNityaFlipped : undefined}
-                    onToggleFlip={founder.name.includes('Nitya') ? () => setIsNityaFlipped(!isNityaFlipped) : undefined}
+                    isFlipped={flippedStates[index]}
+                    onToggleFlip={() => handleToggleFlip(index)}
                   />
                 </div>
               </div>

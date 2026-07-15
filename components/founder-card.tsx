@@ -273,6 +273,78 @@ function CardImage({
   );
 }
 
+function DevanshuCardFront() {
+  return (
+    <div className="absolute inset-0 select-none overflow-hidden rounded-[14px] bg-[#f2f1ec] flex flex-col justify-center items-center h-full w-full">
+      <div className="flex items-center text-[5.5cqw] font-bold tracking-[0.15em] font-sans text-[#1a1c1b]">
+        <span className="mr-[1.5cqw]">DEVANSHU</span>
+        <span className="bg-[#1a1c1b] text-[#f2f1ec] px-[2cqw] py-[1cqw]">VERMA</span>
+      </div>
+    </div>
+  );
+}
+
+function DevanshuCardBack({ founder }: { founder: Founder }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden rounded-[14px] bg-[#f2f1ec] p-[8cqw] text-[#1a1c1b] flex flex-col justify-between h-full w-full font-sans">
+      {/* Top Left Title */}
+      <div className="inline-flex flex-col self-start">
+        <h2 className="text-[7.2cqw] font-bold tracking-tight text-[#1a1c1b] leading-none mb-[1cqw]">
+          DEVANSHU VERMA
+        </h2>
+        <div className="h-[1.2cqw] w-full bg-[#1a1c1b]" />
+      </div>
+
+      {/* Bottom Left Links */}
+      <div className="flex flex-col gap-[2.5cqw] text-[3.6cqw] font-normal tracking-[0.02em] pointer-events-auto w-fit text-[#1a1c1b]">
+        {/* GitHub */}
+        <a
+          href={`https://github.com/${founder.github}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-[3cqw] hover:text-[#555] transition-colors"
+        >
+          <svg width="4.5cqw" height="4.5cqw" viewBox="0 0 24 24" fill="currentColor" className="shrink-0">
+            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.376.202 2.394.1 2.646.64.699 1.026 1.591 1.026 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
+          </svg>
+          <span className="font-sans font-light tracking-wide">{founder.github}</span>
+        </a>
+
+        {/* LinkedIn */}
+        <a
+          href={`https://linkedin.com/in/${founder.linkedin}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-[3cqw] hover:text-[#555] transition-colors"
+        >
+          <div className="relative shrink-0 flex">
+            <span className="flex items-center justify-center rounded-[0.5cqw] bg-[#1a1c1b] text-[#f2f1ec] font-sans font-bold select-none" style={{ width: '4.5cqw', height: '4.5cqw', fontSize: '3.2cqw', letterSpacing: '-0.05em' }}>
+              in
+            </span>
+            <span className="absolute -bottom-[0.1cqw] -right-[1.4cqw] text-[1.4cqw] font-bold">®</span>
+          </div>
+          <span className="font-sans font-light tracking-wide ml-[0.5cqw]">{founder.linkedin}</span>
+        </a>
+
+        {/* Email */}
+        <a
+          href={`mailto:${founder.email}`}
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-[3cqw] hover:text-[#555] transition-colors"
+        >
+          <svg width="4.5cqw" height="4.5cqw" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+            <path d="M2 6l10 7 10-7"></path>
+          </svg>
+          <span className="font-sans font-light tracking-wide">{founder.email}</span>
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function NityaCardFront() {
   return (
     <div className="absolute inset-0 select-none overflow-hidden rounded-[14px] bg-[#001246] p-[6cqw] text-[#f7fbfd] flex flex-col justify-between border border-[#001246] h-full w-full">
@@ -291,6 +363,103 @@ function NityaCardFront() {
       <div className="flex items-center gap-[3cqw]">
         <div className="bg-[#f7fbfd] shrink-0" style={{ width: '3.2cqw', height: '3.2cqw' }} />
         <div className="w-full bg-[#f7fbfd]" style={{ height: '0.3cqw' }} />
+      </div>
+    </div>
+  );
+}
+
+function AaravCardFront() {
+  return (
+    <div className="absolute inset-0 select-none overflow-hidden rounded-[14px] bg-[#e8e6e1] flex flex-col justify-center items-center h-full w-full">
+      {/* Halftone Pattern Background */}
+      <div 
+        className="absolute inset-0 opacity-40 mix-blend-multiply" 
+        style={{
+          backgroundImage: 'radial-gradient(circle at center, #131211 1.5px, transparent 2px)',
+          backgroundSize: '1.5cqw 1.5cqw',
+          maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)',
+          WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)',
+        }}
+      />
+
+      {/* Giant Display Name */}
+      <div className="flex flex-col w-full text-center leading-[0.8] tracking-tighter relative z-10 font-black mt-[-8cqw]" style={{ fontFamily: 'Impact, Arial Black, system-ui, sans-serif', color: '#ff0000' }}>
+        <span style={{ fontSize: '24cqw', transform: 'scaleY(1.15)', transformOrigin: 'bottom' }}>AARAV</span>
+        <span style={{ fontSize: '13.8cqw', transform: 'scaleY(1.15)', transformOrigin: 'top' }}>HALVADIYA</span>
+      </div>
+
+      {/* Bottom Left Label */}
+      <div className="absolute bottom-[4.5cqw] left-[5cqw] text-[3.6cqw] font-medium tracking-tight font-sans text-[#ff0000] z-10">
+        Android Developer
+      </div>
+    </div>
+  );
+}
+
+function AaravCardBack({ founder }: { founder: Founder }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden rounded-[14px] bg-[#e8e6e1] p-[5.5cqw] text-[#131211] flex flex-col justify-between border border-border/85 h-full w-full font-sans">
+      {/* Top Right Medium */}
+      <div className="w-full text-right text-[2.5cqw] font-medium">
+        {founder.medium && (
+          <a
+            href={`https://medium.com/@${founder.medium}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="hover:text-[#ff0000] transition-colors pointer-events-auto"
+          >
+            medium.com/@{founder.medium}
+          </a>
+        )}
+      </div>
+
+      {/* Bottom Left Links */}
+      <div className="flex flex-col gap-[3.5cqw] text-[3.2cqw] font-bold mt-auto pointer-events-auto w-fit">
+        {/* GitHub */}
+        <a
+          href={`https://github.com/${founder.github}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-[2.5cqw] hover:text-[#ff0000] transition-colors"
+        >
+          <span className="flex items-center justify-center shrink-0 text-[#131211]" style={{ width: '4.5cqw', height: '4.5cqw' }}>
+            <svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2A10 10 0 002 12c0 4.4 2.87 8.2 6.84 9.5.5.08.66-.23.66-.5v-1.7c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.1.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 015 0c1.9-1.3 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.2 22 16.4 22 12A10 10 0 0012 2z" />
+            </svg>
+          </span>
+          <span className="font-sans font-medium">{founder.github}</span>
+        </a>
+
+        {/* LinkedIn */}
+        <a
+          href={`https://linkedin.com/in/${founder.linkedin}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-[2.5cqw] hover:text-[#ff0000] transition-colors"
+        >
+          <span className="flex items-center justify-center rounded-[0.8cqw] bg-[#131211] text-[#e8e6e1] font-sans font-black select-none shrink-0" style={{ width: '4.5cqw', height: '4.5cqw', fontSize: '3cqw' }}>
+            in
+          </span>
+          <span className="font-sans font-medium">{founder.linkedin}</span>
+        </a>
+
+        {/* Email */}
+        <a
+          href={`mailto:${founder.email}`}
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-[2.5cqw] hover:text-[#ff0000] transition-colors"
+        >
+          <span className="flex items-center justify-center shrink-0 border-[0.3cqw] border-[#131211] rounded-[0.6cqw] text-[#131211]" style={{ width: '4.5cqw', height: '3.5cqw' }}>
+            <svg width="75%" height="75%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </span>
+          <span className="font-sans font-medium">{founder.email}</span>
+        </a>
       </div>
     </div>
   );
@@ -394,6 +563,8 @@ export function FounderCard({
   const front = useMemo(() => frontSvg(founder), [founder]);
   const back = useMemo(() => backSvg(founder), [founder]);
   const isNitya = founder.name.includes('Nitya');
+  const isAarav = founder.name.includes('Aarav');
+  const isDevanshu = founder.name.includes('Devanshu');
 
   return (
     <button
@@ -422,7 +593,7 @@ export function FounderCard({
               transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0"
             >
-              {isNitya ? <NityaCardFront /> : <CardImage src={front} alt={`${founder.name} front`} hidden={flipped} />}
+              {isNitya ? <NityaCardFront /> : isAarav ? <AaravCardFront /> : isDevanshu ? <DevanshuCardFront /> : <CardImage src={front} alt={`${founder.name} front`} hidden={flipped} />}
             </motion.div>
             <motion.div
               animate={{ opacity: flipped ? 1 : 0 }}
@@ -431,6 +602,10 @@ export function FounderCard({
             >
               {isNitya ? (
                 <NityaCardBack />
+              ) : isAarav ? (
+                <AaravCardBack founder={founder} />
+              ) : isDevanshu ? (
+                <DevanshuCardBack founder={founder} />
               ) : (
                 <div className="relative w-full h-full">
                   <CardImage src={back} alt={`${founder.name} back`} hidden={!flipped} />
@@ -496,11 +671,15 @@ export function FounderCard({
             className="absolute inset-0"
           >
             <div className="absolute inset-0 [backface-visibility:hidden]">
-              {isNitya ? <NityaCardFront /> : <CardImage src={front} alt={`${founder.name} front`} />}
+              {isNitya ? <NityaCardFront /> : isAarav ? <AaravCardFront /> : isDevanshu ? <DevanshuCardFront /> : <CardImage src={front} alt={`${founder.name} front`} />}
             </div>
             <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]">
               {isNitya ? (
                 <NityaCardBack />
+              ) : isAarav ? (
+                <AaravCardBack founder={founder} />
+              ) : isDevanshu ? (
+                <DevanshuCardBack founder={founder} />
               ) : (
                 <div className="relative w-full h-full">
                   <CardImage src={back} alt={`${founder.name} back`} />
