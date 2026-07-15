@@ -97,7 +97,7 @@ export function Mockup({ type, label, imageSrc, imageAlt, priority = false }: Mo
                   </div>
                   <div className="space-y-1 text-ink text-[0.55rem] lowercase leading-relaxed">
                     <p className="text-muted uppercase font-bold tracking-widest text-[0.5rem] mt-2">[system_logs]</p>
-                    <p>&gt; cargo build --release --target wasm32</p>
+                    <p>&gt; npm run build -- --production</p>
                     <p className="text-accent">&gt; compiling rust decoders... done</p>
                     <p>&gt; listening on WebRTC data channels</p>
                   </div>

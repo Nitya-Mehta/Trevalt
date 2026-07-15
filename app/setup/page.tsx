@@ -10,7 +10,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full justify-center rounded-xl border border-accent bg-accent py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+      className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.01] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-[0_0_15px_-3px_var(--accent)]"
     >
       {pending ? 'Updating...' : 'Update Password'}
     </button>

@@ -10,7 +10,7 @@ export function ProjectDetail({ project }: { project: Project }) {
   const screenshots = project.screenshots ?? [];
 
   return (
-    <section className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-16">
+    <section className="mx-auto w-full max-w-[var(--page-max)] px-5 pt-6 pb-12 md:px-8 md:pt-10 md:pb-16">
       <div className="max-w-[46rem]">
         {project.thumbnail ? (
           <div className="relative h-20 w-20 mb-6 overflow-hidden rounded-2xl border border-border bg-[#080706] flex items-center justify-center shadow-md">
@@ -98,14 +98,14 @@ export function ProjectDetail({ project }: { project: Project }) {
                 <article className="border border-border bg-card p-5">
                   <h2 className="font-display text-2xl font-bold tracking-display">Links</h2>
                   <div className="mt-4 flex flex-wrap gap-3">
-                    {project.links?.map((link) =>
+                    {project.links?.map((link, index) =>
                       link.label === 'Get it on Google Play' ? (
                         <a
-                          key={link.label}
+                          key={index}
                           href={link.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-xl border border-accent bg-accent px-5 py-3 font-mono text-[0.75rem] uppercase tracking-[0.18em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.02]"
+                          className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95"
                         >
                           <PlayStoreIcon />
                           {link.label}
@@ -113,11 +113,11 @@ export function ProjectDetail({ project }: { project: Project }) {
                         </a>
                       ) : (
                         <a
-                          key={link.label}
+                          key={index}
                           href={link.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3 font-mono text-[0.75rem] uppercase tracking-[0.18em] text-ink transition-colors duration-200 ease-smooth hover:bg-white/[0.02]"
+                          className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-border bg-transparent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-accent/40 hover:bg-accent/5 hover:text-accent active:scale-95"
                         >
                           {link.label === 'GitHub' ? <GitHubIcon /> : null}
                           {link.label}

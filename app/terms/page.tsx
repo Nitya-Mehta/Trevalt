@@ -154,7 +154,7 @@ export default function TermsPage() {
               <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-accent">Privacy</p>
               <h2 className="mt-3 font-display text-3xl font-bold tracking-display md:text-4xl">Privacy summary</h2>
               <p className="mt-5 text-muted md:text-base md:leading-7">
-                Trevalt uses contact form submissions only to respond to inquiries and operates the site with the service providers required for hosting and form handling. We strictly do not sell, rent, or display any of your personal or project data to third parties. If a project is featured on our portfolio, it will be a data-free clone showing only the design structure, and we will request your explicit permission every time beforehand. For questions about data handling, email <a className="text-ink underline decoration-accent underline-offset-4" href="mailto:nityachintan@gmail.com">nityachintan@gmail.com</a>.
+                Trevalt uses contact form submissions only to respond to inquiries and operates the site with the service providers required for hosting and form handling. We strictly do not sell, rent, or display any of your personal or project data to third parties. If a project is featured on our portfolio, it will be a data-free clone showing only the design structure, and we will request your explicit permission every time beforehand. For questions about data handling, email <a className="text-ink underline decoration-accent underline-offset-4" href="mailto:trevalt.tech@gmail.com">trevalt.tech@gmail.com</a>.
               </p>
             </div>
           </div>

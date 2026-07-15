@@ -27,27 +27,34 @@ export const projects: Project[] = [
   {
     slug: 'newageit',
     title: 'NewAgeIT',
-    tagline: 'High-throughput WebRTC-based telemetry dashboard and cloud brand suite.',
+    tagline: 'A full-stack electronics commerce platform with custom build configurators and advanced catalog management.',
     description:
-      'NewAgeIT required a low-latency operations terminal to visualize stream metrics from their edge IoT nodes in real-time. We engineered a static-first Next.js web application utilizing WebRTC channels and rust-wasm decoders to display thousands of active streams with minimal main-thread overhead.',
+      'A full-stack electronics commerce platform with custom build configurators, advanced catalog management, GST-aware checkout, payment and shipping integrations, wishlists, returns/exchanges, and an admin dashboard for managing the storefront and product ecosystem.',
     tier: 'major',
     mockupType: 'laptop',
-    tech: ['Next.js', 'WebRTC', 'Rust WASM', 'Tailwind', 'Docker'],
-    category: 'Edge Infrastructure',
+    tech: ['React 19', 'Vite', 'Node.js', 'Express 5', 'MySQL', 'Playwright'],
+    category: 'E-Commerce Platform',
     developer: 'Nitya Mehta & Devanshu Verma',
     story:
-      'Faced with rising latency and rendering bottlenecks from standard WebSocket pipelines, NewAgeIT commissioned Trevalt to rebuild their stream dashboard. By compiling high-frequency packet decoders to WebAssembly and bypassing the central server using direct WebRTC data channels, we reduced display latency from 240ms to a sub-45ms baseline.',
+      'This project is a full-stack e-commerce platform built for tech and electronics shopping, with a strong focus on custom system building and guided purchasing. It combines a modern React/Vite frontend with an Express/MySQL backend to support product browsing, intelligent filtering, cart and checkout flows, wishlists, user accounts, order tracking, refund/cancel requests, and a large admin dashboard for managing catalog and storefront content. What makes it stand out is its specialized buying experiences for PC builds, NAS setups, CCTV/security, and network hardware.',
     links: [
-      { label: 'Live Console', href: 'https://newageit.trevalt.com' },
-      { label: 'GitHub', href: 'https://github.com/trevalt-studio/newageit-dashboard' },
+      { label: 'Live site', href: '#' },
     ],
     features: [
-      'Zero-Copy Frame Processing — stream packets are rendered directly to WebGL contexts via Rust-compiled decoders',
-      'Asymmetric Control Console — responsive desktop layouts mapping telemetry nodes in real-time',
-      'Dynamic WebRTC Topology — client devices handshake directly with edge nodes to minimize network transit overhead',
-      'Stateless Auth & Config — local-first sessions secured with ephemeral ECDSA signatures',
+      'Custom system configurators for PC builds, NAS, and CCTV setups',
+      'Advanced catalog with intelligent filtering, combo offers, and condition-based pricing',
+      'Modular Express API with independent route groups for payments, compatibility, and returns',
+      'GST-aware checkout flow with dynamic shipping quotes and payment verification',
+      'End-to-end admin dashboard for storefront merchandising and product ecosystem management',
+      'Comprehensive testing suite using Vitest, React Testing Library, and Playwright',
     ],
     thumbnail: '/projects/newageit/logo.png',
+    screenshots: [
+      '/projects/newageit/01.png',
+      '/projects/newageit/02.png',
+      '/projects/newageit/03.png',
+      '/projects/newageit/04.png',
+    ],
   },
   {
     slug: 'geowav',
@@ -121,22 +128,19 @@ export const projects: Project[] = [
       'Developed a full-stack web platform for managing construction machinery catalogs, customer inquiries, brochures, and administrative operations. Implemented secure authentication, product management workflows, inquiry handling, and role-based access controls.',
     tier: 'minor',
     mockupType: 'laptop',
-    tech: ['React.js', 'Express.js', 'MySQL', 'Node.js'],
+    tech: ['React 19', 'Vite', 'Express 5', 'MySQL 8', 'Framer Motion'],
     category: 'Full-Stack Development',
     developer: 'Devanshu Verma',
     story:
-      'Sparkline required a scalable frontend and backend system with database integration for efficient business operations. We built a robust platform allowing customers to view product catalogs and request quotes, while admins can manage inventory and inquiries via role-based access controls.',
+      'Sparkline is a full-stack catalog and inquiry platform for construction machinery. Built with a React/Vite frontend and an Express/MySQL backend, it supports public catalog browsing, account-aware quote requests, and an extensive admin portal for managing inquiries, inventory, and users with role-based access control.',
     links: [
       { label: 'Live site', href: 'https://www.sparklineindia.com/' }
     ],
     features: [
-      'Product catalog management',
-      'Customer inquiry and quotation system',
-      'User authentication and password recovery',
-      'Admin dashboard and user management',
-      'Brochure request handling',
-      'Gallery and inventory management',
-      'Role-based access control (RBAC)'
+      'Public catalog browsing for categories, products, brochures, gallery media, and spare-parts inquiry',
+      'User authentication with signup, login, password reset, and account-aware quote forms',
+      'Admin portal for inquiries, catalog management, gallery management, user management, tasks, and audits',
+      'Owner-level controls for admin account creation and destructive catalog actions'
     ],
     thumbnail: '/projects/sparkline/logo.png',
   },

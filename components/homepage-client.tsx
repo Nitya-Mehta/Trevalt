@@ -212,7 +212,7 @@ export function HomepageClient() {
                 <div className="mt-8">
                   <Link
                     href="/contact"
-                    className="inline-flex w-fit items-center rounded-xl border border-accent bg-accent px-6 py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.02]"
+                    className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95"
                   >
                     Get in touch
                     <ArrowUpRightIcon />
@@ -228,7 +228,7 @@ export function HomepageClient() {
               <div className="mt-4 space-y-4">
                 <div className="border-b border-border/40 pb-2">
                   <span className="block text-accent text-[0.6rem] tracking-[0.2em]">01 / WEBSITES</span>
-                  <span className="mt-1 block text-ink text-[0.65rem]">Next.js / React / WASM</span>
+                  <span className="mt-1 block text-ink text-[0.65rem]">Next.js / React / MERN</span>
                 </div>
                 <div className="border-b border-border/40 pb-2">
                   <span className="block text-accent text-[0.6rem] tracking-[0.2em]">02 / MOBILE APPS</span>
@@ -241,7 +241,7 @@ export function HomepageClient() {
               </div>
             </div>
 
-            <div className="border-t border-border/80 pt-4">
+            <div className="border-t border-border pt-4">
               <span className="block text-muted font-bold">STUDIO_STATEMENT</span>
               <p className="mt-2 text-[0.65rem] leading-4 text-muted normal-case font-sans tracking-normal">
                 A three-person engineering studio covering Android, full-stack web, and AI. Small enough to ship in weeks, skilled enough to bypass the learning curve.
@@ -263,12 +263,12 @@ export function HomepageClient() {
       {/* Major 01 - NewAgeIT */}
       <section
         ref={majorOneRef}
-        className="relative flex min-h-[90vh] items-center overflow-hidden border-b border-border"
+        className="relative flex min-h-[600px] md:min-h-[700px] items-center overflow-hidden border-b border-border"
       >
         <div data-project-numeral className="pointer-events-none absolute right-4 top-4 z-0 select-none font-display text-[14rem] font-bold leading-none tracking-display text-ink/[0.03] md:right-12 md:top-6 md:text-[20rem]">
           01
         </div>
-        <div className="relative z-10 mx-auto grid w-full max-w-[var(--page-max)] gap-10 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-8 md:py-20">
+        <div className="relative z-10 mx-auto grid w-full max-w-[var(--page-max)] gap-8 px-5 py-6 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-8">
           <div className="relative max-w-[42rem]">
             <div data-project-meta className="mb-6 flex items-center gap-4 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
               <span>01 / 05 // CASE STUDY</span>
@@ -289,36 +289,42 @@ export function HomepageClient() {
               </div>
               <div className="grid gap-2 md:grid-cols-[8rem_1fr] md:gap-4 font-mono text-[0.72rem] tracking-[0.16em]">
                 <span className="uppercase text-accent">Core Specs</span>
-                <span className="text-muted">sub-45ms latency // WebRTC stream multiplexing // rust-wasm decoders</span>
+                <span className="text-muted">modular checkout architecture // intelligent parts compatibility engine // GST-aware dynamic routing</span>
               </div>
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={`/projects/${majorProjects[0].slug}`}
-                className="inline-flex w-fit items-center gap-2 rounded-xl border border-accent bg-accent px-5 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.02]"
+                className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95"
               >
                 Inspect brief
                 <ArrowUpRightIcon />
               </Link>
-              <a
-                href={majorProjects[0].links?.[1]?.href}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 rounded-xl border border-border px-5 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-ink transition-colors duration-200 ease-smooth hover:border-ink/40"
-              >
-                <GitHubIcon />
-                GitHub
-                <ArrowUpRightIcon />
-              </a>
+              {majorProjects[0].links?.[0] && (
+                <a
+                  href={majorProjects[0].links[0].href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-border bg-transparent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-accent/40 hover:bg-accent/5 hover:text-accent active:scale-95"
+                >
+                  {majorProjects[0].links[0].label}
+                  <ArrowUpRightIcon />
+                </a>
+              )}
             </div>
           </div>
           <Link
             href={`/projects/${majorProjects[0].slug}`}
             data-project-mockup
-            className="block origin-center will-change-transform transition-transform duration-300 hover:scale-[1.015]"
+            className="block w-full max-w-[450px] lg:max-w-[550px] justify-self-center origin-center will-change-transform transition-transform duration-300 hover:scale-[1.015]"
           >
-            <Mockup type="laptop" label="NewAgeIT Live Operations Console" />
+            <Mockup
+              type="laptop"
+              label="NewAgeIT Live Operations Console"
+              imageSrc={majorProjects[0].screenshots?.[0]}
+              imageAlt="NewAgeIT Live Operations Console"
+            />
           </Link>
         </div>
       </section>
@@ -326,21 +332,21 @@ export function HomepageClient() {
       {/* Major 02 - GeoWav */}
       <section
         ref={majorTwoRef}
-        className="relative flex min-h-[90vh] items-center overflow-hidden border-b border-border"
+        className="relative flex min-h-[600px] md:min-h-[700px] items-center overflow-hidden border-b border-border"
       >
         <div data-project-numeral className="pointer-events-none absolute bottom-4 left-4 z-0 select-none font-display text-[14rem] font-bold leading-none tracking-display text-ink/[0.03] md:bottom-6 md:left-12 md:text-[20rem]">
           02
         </div>
-        <div className="relative z-10 mx-auto grid w-full max-w-[var(--page-max)] gap-10 px-5 py-16 md:grid-cols-[0.85fr_1.15fr] md:items-center md:px-8 md:py-20">
+        <div className="relative z-10 mx-auto grid w-full max-w-[var(--page-max)] gap-8 px-5 py-6 md:grid-cols-[0.85fr_1.15fr] md:items-center md:px-8">
           <Link
             href={`/projects/${majorProjects[1].slug}`}
             data-project-mockup
-            className="order-2 block origin-center will-change-transform transition-transform duration-300 hover:scale-[1.015] md:order-1"
+            className="order-2 block w-full max-w-[220px] lg:max-w-[260px] justify-self-center origin-center will-change-transform transition-transform duration-300 hover:scale-[1.015] md:order-1"
           >
             <Mockup
               type="phone"
               label="GeoWav / App preview"
-              imageSrc={majorProjects[1].screenshots?.[0]}
+              imageSrc={majorProjects[1].screenshots?.[0] || '/images/projects/01.png'}
               imageAlt="GeoWav app screen"
             />
           </Link>
@@ -369,7 +375,7 @@ export function HomepageClient() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={`/projects/${majorProjects[1].slug}`}
-                className="inline-flex w-fit items-center gap-2 rounded-xl border border-accent bg-accent px-5 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.02]"
+                className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95"
               >
                 Inspect brief
                 <ArrowUpRightIcon />
@@ -378,7 +384,7 @@ export function HomepageClient() {
                 href={majorProjects[1].links?.[0]?.href}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 rounded-xl border border-border px-5 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-ink transition-colors duration-200 ease-smooth hover:border-ink/40"
+                className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-border bg-transparent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-accent/40 hover:bg-accent/5 hover:text-accent active:scale-95"
               >
                 <PlayStoreIcon />
                 Live app
@@ -439,7 +445,7 @@ export function HomepageClient() {
                     <div className="mt-8">
                       <div className="flex flex-wrap gap-2 text-[0.65rem] font-mono uppercase tracking-[0.16em] text-muted border-t border-border/60 pt-4 mb-5 pointer-events-none">
                         {project.tech.map((tag) => (
-                          <span key={tag} className="border border-border/80 px-2 py-1">
+                          <span key={tag} className="border border-border px-2 py-1">
                             {tag}
                           </span>
                         ))}
@@ -447,7 +453,7 @@ export function HomepageClient() {
                       <Link
                         href={`/projects/${project.slug}`}
                         onPointerDown={(e) => e.stopPropagation()}
-                        className="inline-flex w-fit items-center gap-2 rounded border border-border/60 bg-paper/50 px-4 py-2.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-ink transition-colors hover:border-accent hover:text-accent md:cursor-pointer"
+                        className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-border bg-transparent px-5 py-2 font-mono text-[0.6rem] font-bold uppercase tracking-[0.2em] text-muted backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-accent/40 hover:bg-accent/5 hover:text-accent active:scale-95 md:cursor-pointer"
                       >
                         OPEN PROJECT
                         <ArrowUpRightIcon />
@@ -462,47 +468,77 @@ export function HomepageClient() {
       </section>
 
       {/* Closing / Contact CTA */}
-      <section ref={closingRef} className="relative flex min-h-[80vh] items-center">
-        <div className="mx-auto grid w-full max-w-[var(--page-max)] gap-12 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-end md:px-8 md:py-24">
-          <div className="flex flex-col gap-8">
-            <div className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-accent">
-              [START A PROJECT]
+      <section ref={closingRef} className="relative flex items-center border-t border-border bg-card/20 py-24 md:py-32 overflow-hidden">
+        {/* Background glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,var(--accent)_0%,transparent_50%)] opacity-[0.03]"></div>
+        
+        <div className="relative z-10 mx-auto grid w-full max-w-[var(--page-max)] gap-16 px-5 md:grid-cols-[1fr_350px] lg:grid-cols-[1fr_400px] md:items-end md:px-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col gap-8"
+          >
+            <div className="flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-accent">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+              </span>
+              Accepting New Projects
             </div>
-            <h2 data-closing-copy className="max-w-[32rem] font-display text-4xl font-bold leading-[0.95] tracking-display md:text-5xl lg:text-7xl">
-              Ready when the content is.
+            
+            <h2 data-closing-copy className="max-w-[40rem] font-display text-5xl font-bold leading-[0.9] tracking-display md:text-7xl lg:text-[7rem]">
+              Let&apos;s build <br/><span className="text-muted">together.</span>
             </h2>
-            <Link
-              href="/contact"
-              className="inline-flex w-fit items-center rounded-xl border border-accent bg-accent px-6 py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.02]"
+            
+            <div className="mt-4">
+              <Link
+                href="/contact"
+                className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-8 py-4 font-mono text-[0.75rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_20px_-5px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_30px_-5px_var(--accent)] active:scale-95"
+              >
+                Start a project
+                <ArrowUpRightIcon />
+              </Link>
+            </div>
+          </motion.div>
+
+          <div className="grid gap-12 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-muted">
+            
+            {/* Contact */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="group flex flex-col gap-4 border-l-2 border-border/50 pl-6 transition-colors duration-300 hover:border-accent"
             >
-              Get in touch
-              <ArrowUpRightIcon />
-            </Link>
-          </div>
+              <span className="text-accent font-bold tracking-[0.2em]">01 // DIRECTORY</span>
+              <a href="mailto:trevalt.tech@gmail.com" className="text-lg font-sans font-medium text-ink lowercase tracking-normal transition-colors duration-300 group-hover:text-accent">
+                trevalt.tech@gmail.com
+              </a>
+              <span className="text-[0.6rem] leading-relaxed">
+                Response expected within<br/>24 business hours.
+              </span>
+            </motion.div>
 
-          <div className="grid gap-8 border-t border-border pt-8 md:border-t-0 md:pt-0 font-mono text-[0.72rem] uppercase tracking-[0.18em]">
-            <div className="grid gap-2 border-b border-border/60 pb-4">
-              <span className="text-accent">DIRECT DIRECTORY</span>
-              <div className="grid gap-1">
-                <span className="text-[0.95rem] text-ink lowercase tracking-normal font-sans font-medium">nityachintan@gmail.com</span>
-                <span className="text-[0.95rem] text-ink lowercase tracking-normal font-sans font-medium">aaravhalvadiya@gmail.com</span>
-                <span className="text-[0.95rem] text-ink lowercase tracking-normal font-sans font-medium">devanshuverma72@gmail.com</span>
+            {/* Studio / Location */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="flex flex-col gap-4 border-l-2 border-border/50 pl-6 transition-colors duration-300 hover:border-accent"
+            >
+              <span className="text-accent font-bold tracking-[0.2em]">02 // STUDIO</span>
+              <div className="flex flex-col gap-2 text-[0.65rem]">
+                <span>EST. 2026</span>
+                <span>GLOBAL / REMOTE</span>
+                <span>CORES: 3</span>
               </div>
-            </div>
-
-            <div className="grid gap-2 border-b border-border/60 pb-4">
-              <span className="text-accent">PROJECT PORTFOLIO</span>
-              <span className="text-sm text-muted leading-6">
-                01 NewAgeIT // 02 GeoWav // 03 ParkEase // 04 Sparkline // 05 NoteStack
-              </span>
-            </div>
-
-            <div className="grid gap-2">
-              <span className="text-accent">STUDIO METRICS</span>
-              <span className="text-muted">
-                CORES: 3 // EST. 2026 // PIPELINES: INTEGRATED
-              </span>
-            </div>
+            </motion.div>
+            
           </div>
         </div>
       </section>

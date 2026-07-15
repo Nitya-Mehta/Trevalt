@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useActionState } from 'react';
 import Image from 'next/image';
 import { SiteShell } from '@/components/site-shell';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { submitContactForm } from '@/app/actions/contact';
 import { motion } from 'framer-motion';
 
@@ -15,7 +15,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full justify-center rounded-xl border border-accent bg-accent py-4 font-mono text-[0.75rem] uppercase tracking-[0.2em] text-paper transition-transform duration-200 ease-smooth hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+      className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.01] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-[0_0_15px_-3px_var(--accent)]"
     >
       {pending ? 'Sending...' : 'Send Message'}
     </button>
@@ -23,7 +23,7 @@ function SubmitButton() {
 }
 
 export default function ContactPage() {
-  const [state, formAction] = useFormState(submitContactForm, null);
+  const [state, formAction] = useActionState(submitContactForm, null);
   const [budgetRanges, setBudgetRanges] = useState([
     'Under $1.5k',
     '$1.5k - $10k',
@@ -71,6 +71,9 @@ export default function ContactPage() {
                 </h1>
                 <p className="mt-6 text-base leading-7 text-muted md:text-lg">
                   Let us know what you are building. Once submitted, we will review the details and set up a private Slack channel within 24 hours to kick off the project.
+                </p>
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  For general support or to contact us for anything else, email us directly at <a href="mailto:trevalt.tech@gmail.com" className="text-ink hover:text-accent transition-colors font-mono">trevalt.tech@gmail.com</a>.
                 </p>
               </div>
 

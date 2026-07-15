@@ -8,16 +8,16 @@ import { ArrowUpRightIcon, GitHubIcon } from '@/components/icons';
 import { projects } from '@/lib/projects';
 import { ZoomableImage } from '@/components/zoomable-image';
 
-const project = projects.find((p) => p.slug === 'parkease');
+const project = projects.find((p) => p.slug === 'newageit');
 
-export default function ParkEasePage() {
+export default function NewAgeITPage() {
   if (!project) return null;
 
   const screenshots = [
-    '/projects/parkease/01.png',
-    '/projects/parkease/02.png',
-    '/projects/parkease/03.png',
-    '/projects/parkease/04.png'
+    '/projects/newageit/01.png',
+    '/projects/newageit/02.png',
+    '/projects/newageit/03.png',
+    '/projects/newageit/04.png'
   ];
 
   return (
@@ -91,13 +91,13 @@ export default function ParkEasePage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative aspect-[4/3] rounded-[2rem] overflow-hidden border border-border shadow-2xl bg-card"
+              className="relative rounded-[2rem] overflow-hidden border border-border shadow-2xl bg-card"
             >
               {/* Using ZoomableImage to enable lightbox click */}
               <ZoomableImage
                 src={screenshots[0]}
                 alt={`${project.title} UI Preview`}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="w-full h-auto block"
               />
             </motion.div>
           </div>
@@ -113,13 +113,13 @@ export default function ParkEasePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="w-full rounded-2xl overflow-hidden border border-border bg-card shadow-lg relative aspect-[4/3] group"
+                className="w-full rounded-2xl overflow-hidden border border-border bg-card shadow-lg relative group"
               >
                 <div className="absolute inset-0 bg-accent/5 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay" />
                 <ZoomableImage
                   src={src}
                   alt={`${project.title} Screenshot ${index + 2}`}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
                 />
               </motion.div>
             ))}
@@ -167,36 +167,23 @@ export default function ParkEasePage() {
             <ol className="space-y-6 text-muted text-lg">
               <li className="flex gap-4 items-start">
                 <span className="font-mono text-accent text-sm mt-1">01.</span>
-                <div>Create and activate a virtual environment.</div>
+                <div className="w-full">
+                  Clone the repository and install dependencies for both frontend and backend:
+                  <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
+                    <code>npm install</code>
+                  </pre>
+                </div>
               </li>
               <li className="flex gap-4 items-start">
                 <span className="font-mono text-accent text-sm mt-1">02.</span>
-                <div className="w-full">
-                  Install dependencies:
-                  <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
-                    <code>pip install -r requirements.txt</code>
-                  </pre>
-                </div>
+                <div>Create a <code className="text-ink bg-paper px-2 py-1 border border-border/50 rounded text-sm mx-1">.env</code> file in the project root with your database credentials and API keys.</div>
               </li>
               <li className="flex gap-4 items-start">
                 <span className="font-mono text-accent text-sm mt-1">03.</span>
-                <div>Create a <code className="text-ink bg-paper px-2 py-1 border border-border/50 rounded text-sm mx-1">.env</code> file in the project root with the required environment variables.</div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <span className="font-mono text-accent text-sm mt-1">04.</span>
                 <div className="w-full">
-                  Run migrations:
+                  Start the development server (runs both Vite and Express):
                   <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
-                    <code>python manage.py migrate</code>
-                  </pre>
-                </div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <span className="font-mono text-accent text-sm mt-1">05.</span>
-                <div className="w-full">
-                  Start the development server:
-                  <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
-                    <code>python manage.py runserver</code>
+                    <code>npm run dev</code>
                   </pre>
                 </div>
               </li>
@@ -207,15 +194,7 @@ export default function ParkEasePage() {
             <ul className="space-y-4">
               <li className="flex gap-4 items-start">
                 <span className="font-mono text-accent text-sm mt-1">{"//"}</span>
-                <div className="text-muted text-lg">This project is configured for deployment on Vercel with static files collected via WhiteNoise.</div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <span className="font-mono text-accent text-sm mt-1">{"//"}</span>
-                <div className="text-muted text-lg">SQLite is fine for local development, but production should use PostgreSQL.</div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <span className="font-mono text-accent text-sm mt-1">{"//"}</span>
-                <div className="text-muted text-lg">Do not commit <code className="text-ink bg-paper px-2 py-1 border border-border/50 rounded text-sm mx-1">.env</code>, <code className="text-ink bg-paper px-2 py-1 border border-border/50 rounded text-sm mx-1">db.sqlite3</code>, or virtual environment folders to GitHub.</div>
+                <div className="text-muted text-lg">This project is configured for deployment with a static Vite build and a Node.js runtime for the API.</div>
               </li>
             </ul>
 

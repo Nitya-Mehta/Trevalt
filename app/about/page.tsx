@@ -148,7 +148,7 @@ export default function AboutPage() {
               <tbody className="divide-y divide-border/60">
                 <tr>
                   <td className="py-4 font-bold text-ink">Web Applications</td>
-                  <td className="py-4 text-muted">React // Next.js // TypeScript // WASM</td>
+                  <td className="py-4 text-muted">React // Next.js // TypeScript // MERN</td>
                   <td className="py-4 text-right text-accent">READY</td>
                 </tr>
                 <tr>
