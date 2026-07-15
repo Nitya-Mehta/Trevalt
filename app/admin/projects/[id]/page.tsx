@@ -5,7 +5,8 @@ import { ProjectMetadata } from '@/components/project-metadata';
 import { ProjectTimeline } from '@/components/project-timeline';
 import { NotionTaskEngine } from '@/components/notion-task-engine';
 
-export default async function ProjectWorkspacePage({ params }: { params: { id: string } }) {
+export default async function ProjectWorkspacePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const adminClient = createAdminClient();
 
   // Fetch project with payments
@@ -16,7 +17,7 @@ export default async function ProjectWorkspacePage({ params }: { params: { id: s
       client:profiles!client_projects_client_id_fkey(full_name, email),
       payments(*)
     `)
-    .eq('id', params.id)
+    .eq('id', id)
     .single();
 
   if (!project) notFound();

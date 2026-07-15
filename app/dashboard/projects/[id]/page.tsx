@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { ProjectTimeline } from '@/components/project-timeline';
 import { NotionTaskEngine } from '@/components/notion-task-engine';
 
-export default async function ClientProjectWorkspacePage({ params }: { params: { id: string } }) {
-  const supabase = createClient();
+export default async function ClientProjectWorkspacePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const supabase = await createClient();
 
   // Fetch project with payments (RLS ensures they only see their own)
   const { data: project } = await supabase
@@ -14,7 +15,7 @@ export default async function ClientProjectWorkspacePage({ params }: { params: {
       *,
       payments(*)
     `)
-    .eq('id', params.id)
+    .eq('id', id)
     .single();
 
   if (!project) notFound();

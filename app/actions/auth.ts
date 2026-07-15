@@ -34,7 +34,7 @@ export async function login(prevState: any, formData: FormData) {
     return { error: 'Too many failed login attempts. Please try again later or reset your password.' };
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error: signInError } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -88,7 +88,7 @@ export async function forgotPassword(prevState: any, formData: FormData) {
     return { error: 'Admin accounts cannot be reset via this flow. Contact system operations.' };
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/reset-password`,
   });
@@ -102,7 +102,7 @@ export async function forgotPassword(prevState: any, formData: FormData) {
 }
 
 export async function createClientAccount(prevState: any, formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
@@ -165,7 +165,7 @@ export async function createClientAccount(prevState: any, formData: FormData) {
 }
 
 export async function completeSetupWithNewPassword(prevState: any, formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
@@ -201,7 +201,7 @@ export async function completeSetupWithNewPassword(prevState: any, formData: For
 }
 
 export async function keepTemporaryPassword() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {

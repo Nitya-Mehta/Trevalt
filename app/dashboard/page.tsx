@@ -2,7 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import Link from 'next/link';
 
 export default async function ClientDashboardPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   // RLS ensures the user only sees their own projects
   const { data: projects, error: projectsError } = await supabase

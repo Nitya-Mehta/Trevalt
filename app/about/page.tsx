@@ -13,8 +13,8 @@ export default function AboutPage() {
   return (
     <SiteShell>
       <section className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-20">
-        <div className="grid gap-10 lg:grid-cols-[1fr_320px] border-b border-border pb-12">
-          <div>
+        <div className="border-b border-border pb-12">
+          <div className="max-w-[48rem]">
             <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent">
               [STUDIO_ENGINEERS // CREDENTIALS]
             </span>
@@ -24,16 +24,6 @@ export default function AboutPage() {
             <p className="mt-6 max-w-[38rem] text-base leading-7 text-muted md:text-lg">
               We operate as a compact three-person unit. We write code, deploy directly to production, and communicate over shared Slack channels. No account managers, no layers of overhead.
             </p>
-          </div>
-          <div className="flex flex-col justify-end font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted border-t border-border pt-6 lg:border-t-0 lg:pt-0">
-            <div>
-              <span className="block text-accent">CADENCE</span>
-              <span className="mt-1 block text-ink">Continuous ship</span>
-            </div>
-            <div className="mt-4">
-              <span className="block text-accent">OFFICE</span>
-              <span className="mt-1 block text-ink">Stateless // Distributed</span>
-            </div>
           </div>
         </div>
 
@@ -152,7 +142,6 @@ export default function AboutPage() {
                 <tr className="border-b border-border text-accent text-[0.65rem] tracking-[0.2em]">
                   <th className="py-4 font-bold">CAPABILITY</th>
                   <th className="py-4 font-bold">FRAMEWORKS & LANGUAGES</th>
-                  <th className="py-4 font-bold">ARCHITECTURE</th>
                   <th className="py-4 font-bold text-right">STATUS</th>
                 </tr>
               </thead>
@@ -160,19 +149,16 @@ export default function AboutPage() {
                 <tr>
                   <td className="py-4 font-bold text-ink">Web Applications</td>
                   <td className="py-4 text-muted">React // Next.js // TypeScript // WASM</td>
-                  <td className="py-4 text-muted">Static-first // serverless edge</td>
                   <td className="py-4 text-right text-accent">READY</td>
                 </tr>
                 <tr>
                   <td className="py-4 font-bold text-ink">Android Systems</td>
                   <td className="py-4 text-muted">Kotlin // Compose // Room // BLE Mesh</td>
-                  <td className="py-4 text-muted">Local-first // background low-power</td>
                   <td className="py-4 text-right text-accent">READY</td>
                 </tr>
                 <tr>
                   <td className="py-4 font-bold text-ink">AI Pipelines</td>
                   <td className="py-4 text-muted">Go // gRPC // PyTorch // CUDA</td>
-                  <td className="py-4 text-muted">Distributed execution load-balancing</td>
                   <td className="py-4 text-right text-accent">READY</td>
                 </tr>
               </tbody>
