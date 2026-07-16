@@ -13,16 +13,7 @@ const project = projects.find((p) => p.slug === 'geowav');
 export default function GeoWavPage() {
   if (!project) return null;
 
-  const screenshots = [
-    '/projects/notestack/01.png',
-    '/projects/notestack/02.png',
-    '/projects/notestack/03.png',
-    '/projects/notestack/04.png',
-    '/projects/notestack/05.png',
-    '/projects/notestack/06.png',
-    '/projects/notestack/07.png',
-    '/projects/notestack/08.png',
-  ];
+  const screenshots = project.screenshots || [];
 
   return (
     <SiteShell>
