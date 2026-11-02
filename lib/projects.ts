@@ -37,9 +37,6 @@ export const projects: Project[] = [
     developer: 'Nitya Mehta & Devanshu Verma',
     story:
       'This project is a full-stack e-commerce platform built for tech and electronics shopping, with a strong focus on custom system building and guided purchasing. It combines a modern React/Vite frontend with an Express/MySQL backend to support product browsing, intelligent filtering, cart and checkout flows, wishlists, user accounts, order tracking, refund/cancel requests, and a large admin dashboard for managing catalog and storefront content. What makes it stand out is its specialized buying experiences for PC builds, NAS setups, CCTV/security, and network hardware.',
-    links: [
-      { label: 'Live site', href: '#' },
-    ],
     features: [
       'Custom system configurators for PC builds, NAS, and CCTV setups',
       'Advanced catalog with intelligent filtering, combo offers, and condition-based pricing',
@@ -120,6 +117,12 @@ export const projects: Project[] = [
       'Area-based dashboards and admin scoping',
     ],
     thumbnail: '/projects/parkease/logo.svg',
+    screenshots: [
+      '/projects/parkease/01.png',
+      '/projects/parkease/02.png',
+      '/projects/parkease/03.png',
+      '/projects/parkease/04.png',
+    ],
   },
   {
     slug: 'sparkline',
@@ -144,6 +147,7 @@ export const projects: Project[] = [
       'Owner-level controls for admin account creation and destructive catalog actions'
     ],
     thumbnail: '/projects/sparkline/logo.png',
+    screenshots: ['/projects/sparkline/01.png'],
   },
   {
     slug: 'notestack',

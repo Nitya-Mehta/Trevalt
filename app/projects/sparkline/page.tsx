@@ -19,7 +19,7 @@ export default function SparklinePage() {
 
   return (
     <SiteShell>
-      <div className="min-h-screen pb-32">
+      <div className="case-study min-h-screen pb-32">
 
         {/* HERO SECTION */}
         <section className="relative w-full max-w-[var(--page-max)] mx-auto px-5 pt-12 pb-24 md:px-8 md:pt-16 md:pb-32 border-b border-border">
@@ -42,7 +42,7 @@ export default function SparklinePage() {
               )}
               <div className="inline-flex items-center gap-3 mb-6">
                 <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent">
-                  [ {project.category || 'CASE STUDY'} ]
+                  {project.category || 'Case study'}
                 </span>
               </div>
 
@@ -51,11 +51,11 @@ export default function SparklinePage() {
               </h1>
 
               <p className="mt-8 text-lg text-muted leading-relaxed">
-                {project.story || project.description}
+                {project.tagline}
               </p>
 
               <div className="mt-8 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-muted flex items-center gap-2 border-l-2 border-accent pl-4">
-                BUILT BY: <span className="text-ink font-bold">{project.developer}</span>
+                By <span className="text-ink font-bold">{project.developer}</span>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-2">
@@ -73,8 +73,8 @@ export default function SparklinePage() {
                     href={link.href}
                     target="_blank"
                     className={`px-8 py-3.5 rounded-full font-bold tracking-wide flex items-center gap-2 text-sm transition-colors ${link.label.toLowerCase().includes('live')
-                        ? 'bg-accent hover:bg-accent/80 text-white'
-                        : 'bg-card hover:bg-white/5 text-ink border border-border'
+                        ? 'bg-ink hover:bg-accent text-paper'
+                        : 'bg-card hover:border-ink text-ink border border-border'
                       }`}
                   >
                     {link.label} {link.label.toLowerCase().includes('github') ? <GitHubIcon /> : <ArrowUpRightIcon />}
@@ -102,6 +102,10 @@ export default function SparklinePage() {
         {/* README STYLE DOCUMENTATION */}
         <section className="w-full max-w-[var(--page-max)] mx-auto px-5 md:px-8 py-24">
           <div className="max-w-[48rem]">
+            <div className="mb-20 border-b border-border pb-16">
+              <span className="state-kicker">The brief</span>
+              <p className="mt-6 text-lg leading-8 text-muted">{project.story || project.description}</p>
+            </div>
 
             {/* FEATURES */}
             {project.features && project.features.length > 0 && (
@@ -142,7 +146,7 @@ export default function SparklinePage() {
                 <span className="font-mono text-accent text-sm mt-1">01.</span>
                 <div className="w-full">
                   Install dependencies:
-                  <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
+                  <pre className="mt-4 bg-[#121412] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
                     <code>npm install</code>
                   </pre>
                 </div>
@@ -151,7 +155,7 @@ export default function SparklinePage() {
                 <span className="font-mono text-accent text-sm mt-1">02.</span>
                 <div className="w-full">
                   Run the frontend (Vite):
-                  <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
+                  <pre className="mt-4 bg-[#121412] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
                     <code>npm run dev</code>
                   </pre>
                 </div>
@@ -160,7 +164,7 @@ export default function SparklinePage() {
                 <span className="font-mono text-accent text-sm mt-1">03.</span>
                 <div className="w-full">
                   Run the backend (Express API on port 3000):
-                  <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
+                  <pre className="mt-4 bg-[#121412] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
                     <code>npm run dev:server</code>
                   </pre>
                 </div>
@@ -210,7 +214,7 @@ export default function SparklinePage() {
                 <span className="font-mono text-accent text-sm mt-1">01.</span>
                 <div className="w-full">
                   Build the frontend:
-                  <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
+                  <pre className="mt-4 bg-[#121412] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
                     <code>npm run build</code>
                   </pre>
                 </div>
@@ -219,7 +223,7 @@ export default function SparklinePage() {
                 <span className="font-mono text-accent text-sm mt-1">02.</span>
                 <div className="w-full">
                   Start the production server:
-                  <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
+                  <pre className="mt-4 bg-[#121412] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
                     <code>npm start</code>
                   </pre>
                 </div>
@@ -233,7 +237,7 @@ export default function SparklinePage() {
             <p className="text-muted text-lg mb-6">
               To wipe inquiry/admin/demo activity while keeping categories, products, specifications, and the owner account:
             </p>
-            <pre className="mt-4 bg-[#080706] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
+            <pre className="mt-4 bg-[#121412] border border-border rounded-xl p-6 font-mono text-[0.85rem] text-ink overflow-x-auto">
               <code>npm run reset:data</code>
             </pre>
             <p className="mt-6 text-muted text-lg">This clears quote enquiries, brochure leads, gallery items, audit logs, admin tasks, sessions, password reset tokens, spare-parts inventory, and all non-owner users.</p>

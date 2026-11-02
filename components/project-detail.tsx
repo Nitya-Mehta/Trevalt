@@ -10,7 +10,7 @@ export function ProjectDetail({ project }: { project: Project }) {
   const screenshots = project.screenshots ?? [];
 
   return (
-    <section className="mx-auto w-full max-w-[var(--page-max)] px-5 pt-6 pb-12 md:px-8 md:pt-10 md:pb-16">
+    <section className="project-detail mx-auto w-full max-w-[var(--page-max)] px-5 pt-6 pb-12 md:px-8 md:pt-10 md:pb-16">
       <div className="max-w-[46rem]">
         {project.thumbnail ? (
           <div className="relative h-20 w-20 mb-6 overflow-hidden rounded-2xl border border-border bg-[#080706] flex items-center justify-center shadow-md">

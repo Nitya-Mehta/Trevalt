@@ -36,7 +36,7 @@ export function HeroAsciiMorph({ disabled = false }: { disabled?: boolean }) {
 
     const pointer = { x: -9999, y: -9999, down: false };
     const reducedMotion = Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    const ink = [243, 243, 242] as const;
+    const ink = [243, 243, 239] as const;
     const accent = [255, 85, 0] as const;
 
     let width = 0;
@@ -77,7 +77,7 @@ export function HeroAsciiMorph({ disabled = false }: { disabled?: boolean }) {
       off.fillStyle = '#ffffff';
       off.textAlign = 'center';
       off.textBaseline = 'middle';
-      const maxByWidth = (cols / Math.max(word.length, 1)) * 1.72;
+      const maxByWidth = (cols / Math.max(word.length, 1)) * 1.3;
       const maxByHeight = rows * 0.62;
       const size = Math.max(8, Math.min(maxByWidth, maxByHeight));
       off.font = `800 ${size}px "Space Grotesk", "Inter", Arial, sans-serif`;

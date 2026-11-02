@@ -109,6 +109,7 @@ export function RequestsDashboard({ initialRequests }: { initialRequests: Reques
         <div className="w-full md:w-64">
           <input 
             type="text" 
+            aria-label="Search requests by name or email"
             placeholder="Search name or email..." 
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -119,8 +120,9 @@ export function RequestsDashboard({ initialRequests }: { initialRequests: Reques
         {/* Filters & Sort */}
         <div className="flex flex-wrap gap-4 w-full md:w-auto">
           <div className="flex items-center gap-2">
-            <label className="font-mono text-[0.6rem] uppercase tracking-widest text-muted">Status:</label>
+            <label htmlFor="request-status-filter" className="font-mono text-[0.6rem] uppercase tracking-widest text-muted">Status:</label>
             <select 
+              id="request-status-filter"
               value={statusFilter} 
               onChange={e => setStatusFilter(e.target.value)}
               className="bg-card border border-border rounded-sm px-2 py-1.5 text-xs outline-none focus:border-accent text-ink"
@@ -133,8 +135,9 @@ export function RequestsDashboard({ initialRequests }: { initialRequests: Reques
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="font-mono text-[0.6rem] uppercase tracking-widest text-muted">Sort:</label>
+            <label htmlFor="request-sort" className="font-mono text-[0.6rem] uppercase tracking-widest text-muted">Sort:</label>
             <select 
+              id="request-sort"
               value={sortBy} 
               onChange={e => setSortBy(e.target.value)}
               className="bg-card border border-border rounded-sm px-2 py-1.5 text-xs outline-none focus:border-accent text-ink"
@@ -165,9 +168,12 @@ export function RequestsDashboard({ initialRequests }: { initialRequests: Reques
                 className="border border-border bg-card/25 rounded-sm overflow-hidden transition-all duration-200"
               >
                 {/* Summary Row (Clickable) */}
-                <div 
+                <button
+                  type="button"
+                  aria-expanded={isExpanded}
+                  aria-controls={`request-details-${req.id}`}
                   onClick={() => setExpandedId(isExpanded ? null : req.id)}
-                  className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 hover:bg-card/50 cursor-pointer transition-colors"
+                  className="flex w-full flex-col text-left md:flex-row md:items-center justify-between gap-4 p-4 hover:bg-card/50 cursor-pointer transition-colors"
                 >
                   <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
                     <div className="min-w-[150px]">
@@ -187,11 +193,11 @@ export function RequestsDashboard({ initialRequests }: { initialRequests: Reques
                       {currentStatus.replace('_', ' ')}
                     </span>
                   </div>
-                </div>
+                </button>
 
                 {/* Expanded Details */}
                 {isExpanded && (
-                  <div className="p-4 md:p-6 border-t border-border bg-card/10 grid md:grid-cols-3 gap-8">
+                  <div id={`request-details-${req.id}`} className="p-4 md:p-6 border-t border-border bg-card/10 grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2 space-y-4">
                       <div>
                         <span className="block font-mono text-[0.65rem] uppercase tracking-widest text-muted mb-2">

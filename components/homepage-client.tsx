@@ -1,545 +1,117 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { HeroAsciiMorph } from '@/components/hero-ascii-morph';
-import { ArrowUpRightIcon, GitHubIcon, PlayStoreIcon } from '@/components/icons';
-import { Mockup } from '@/components/mockups';
 import { projects } from '@/lib/projects';
 
-gsap.registerPlugin(ScrollTrigger);
+const featuredProjects = projects.filter((project) => project.tier === 'major');
+const draggableProjects = projects.filter((project) => project.tier === 'minor');
+const cardPositions = [
+  { left: '2%', top: '14%', rotate: -3 },
+  { left: '35%', top: '26%', rotate: 2 },
+  { left: '68%', top: '10%', rotate: -2 },
+];
 
 export function HomepageClient() {
-  const heroRef = useRef<HTMLElement | null>(null);
-  const majorOneRef = useRef<HTMLElement | null>(null);
-  const majorTwoRef = useRef<HTMLElement | null>(null);
-  const minorRef = useRef<HTMLElement | null>(null);
-  const minorConstraintsRef = useRef<HTMLDivElement | null>(null);
-  const closingRef = useRef<HTMLElement | null>(null);
-  const shouldReduceMotion = useReducedMotion();
-
-  const [isMobile, setIsMobile] = useState(true);
+  const cardAreaRef = useRef<HTMLDivElement | null>(null);
+  const [compact, setCompact] = useState(true);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const update = () => setCompact(window.innerWidth < 1100);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, []);
 
-  const majorProjects = useMemo(() => projects.filter((project) => project.tier === 'major'), []);
-  const minorProjects = useMemo(() => projects.filter((project) => project.tier === 'minor'), []);
-
-  const scatterPositions = useMemo(() => [
-    { left: '4%', top: '15%', rotate: -3 },
-    { left: '36%', top: '35%', rotate: 2 },
-    { left: '68%', top: '10%', rotate: -2 },
-  ], []);
-
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-
-    const lenis = new Lenis({
-      duration: 1.05,
-      smoothWheel: true,
-      lerp: 0.08,
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    const updateLenis = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-    gsap.ticker.add(updateLenis);
-    gsap.ticker.lagSmoothing(0);
-
-    const hero = heroRef.current;
-    const majorOne = majorOneRef.current;
-    const majorTwo = majorTwoRef.current;
-    const minor = minorRef.current;
-    const closing = closingRef.current;
-
-    const triggers: ScrollTrigger[] = [];
-
-    if (hero) {
-      const heroText = hero.querySelector('[data-hero-text]');
-      const heroEyebrow = hero.querySelector('[data-hero-eyebrow]');
-      const heroKeycap = hero.querySelector('[data-hero-keycap]');
-      gsap.set(heroText, { opacity: 1, y: 0, scale: 1 });
-      gsap.set(heroEyebrow, { opacity: 1, x: 0 });
-      gsap.set(heroKeycap, { opacity: 1, x: 0, y: 0 });
-      triggers.push(
-        ScrollTrigger.create({
-          trigger: hero,
-          start: 'top top',
-          end: '+=110%',
-          scrub: 0.45,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            gsap.set(heroText, { opacity: 1 - progress * 1.05, y: progress * 56, scale: 1 - progress * 0.06 });
-            gsap.set(heroEyebrow, { opacity: 1 - progress * 0.65, x: progress * 32 });
-            gsap.set(heroKeycap, { opacity: 1, x: progress * -20, y: progress * 10 });
-          },
-        }),
-      );
-    }
-
-    if (majorOne) {
-      const title = majorOne.querySelector('[data-project-title]');
-      const copy = majorOne.querySelector('[data-project-copy]');
-      const mock = majorOne.querySelector('[data-project-mockup]');
-      const meta = majorOne.querySelector('[data-project-meta]');
-      const numeral = majorOne.querySelector('[data-project-numeral]');
-      gsap.set([title, copy, mock, meta], { opacity: 0 });
-      gsap.set(title, { x: -60 });
-      gsap.set(copy, { x: -24 });
-      gsap.set(mock, { rotate: 11, scale: 0.86, x: 100, y: 52 });
-      gsap.set(numeral, { opacity: 0.08, scale: 1 });
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: majorOne,
-          start: 'top 80%',
-          end: 'bottom 20%',
-          scrub: 0.5,
-        },
-      });
-      timeline
-        .to(title, { opacity: 1, x: 0, duration: 0.3 }, 0)
-        .to(copy, { opacity: 1, x: 0, duration: 0.28 }, 0.08)
-        .to(meta, { opacity: 1, duration: 0.24 }, 0.1)
-        .to(mock, { opacity: 1, rotate: 0, scale: 1, x: 0, y: 0, duration: 0.42 }, 0.04)
-        .to(numeral, { opacity: 0.06, scale: 1.02, duration: 0.42 }, 0);
-      triggers.push(timeline.scrollTrigger as ScrollTrigger);
-    }
-
-    if (majorTwo) {
-      const title = majorTwo.querySelector('[data-project-title]');
-      const copy = majorTwo.querySelector('[data-project-copy]');
-      const mock = majorTwo.querySelector('[data-project-mockup]');
-      const meta = majorTwo.querySelector('[data-project-meta]');
-      const numeral = majorTwo.querySelector('[data-project-numeral]');
-      gsap.set([title, copy, mock, meta], { opacity: 0 });
-      gsap.set(title, { x: 52 });
-      gsap.set(copy, { x: 24 });
-      gsap.set(mock, { rotate: -9, scale: 0.9, x: -92, y: 46 });
-      gsap.set(numeral, { opacity: 0.08, scale: 1 });
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: majorTwo,
-          start: 'top 80%',
-          end: 'bottom 20%',
-          scrub: 0.5,
-        },
-      });
-      timeline
-        .to(title, { opacity: 1, x: 0, duration: 0.3 }, 0)
-        .to(copy, { opacity: 1, x: 0, duration: 0.28 }, 0.08)
-        .to(meta, { opacity: 1, duration: 0.24 }, 0.1)
-        .to(mock, { opacity: 1, rotate: 0, scale: 1, x: 0, y: 0, duration: 0.42 }, 0.04)
-        .to(numeral, { opacity: 0.06, scale: 1.02, duration: 0.42 }, 0);
-      triggers.push(timeline.scrollTrigger as ScrollTrigger);
-    }
-
-    if (minor) {
-      const items = minor.querySelectorAll('[data-minor-item]');
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: minor,
-          start: 'top 80%',
-          end: 'bottom 20%',
-          scrub: 0.45,
-        },
-      });
-      timeline.fromTo(
-        items,
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.28 },
-        0,
-      );
-      triggers.push(timeline.scrollTrigger as ScrollTrigger);
-    }
-
-    if (closing) {
-      const text = closing.querySelector('[data-closing-copy]');
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: closing,
-          start: 'top 82%',
-          end: 'bottom 20%',
-          scrub: 0.45,
-        },
-      });
-      timeline.fromTo(text, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.24 }, 0);
-      triggers.push(timeline.scrollTrigger as ScrollTrigger);
-    }
-
-    ScrollTrigger.refresh();
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      gsap.ticker.remove(updateLenis);
-      lenis.destroy();
-      triggers.length = 0;
-    };
-  }, [shouldReduceMotion]);
-
-  const minorItems = minorProjects.slice(0, 3);
-
   return (
-    <div className="noise">
-      <section
-        ref={heroRef}
-        className="scene-grid relative flex min-h-[calc(100svh-53px)] flex-col justify-between overflow-hidden border-b border-border"
-      >
-        <div className="relative mx-auto grid w-full max-w-[var(--page-max)] grow grid-cols-1 md:grid-cols-[1fr_260px] md:divide-x md:divide-border px-0">
-          <div className="flex flex-col justify-start px-5 py-8 md:px-8 md:py-14">
-            <div>
-              <div data-hero-eyebrow className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.28em] text-accent md:text-[0.72rem]">
-                FOR TEAMS WITHOUT A TECH CO-FOUNDER
-              </div>
-              <div data-hero-text className="mt-4 max-w-[56rem]">
-                <h1 className="font-display text-[clamp(2.5rem,5.5vw,5.5rem)] font-bold leading-[0.92] tracking-display text-ink">
-                  Your idea needs code.
-                  <span className="mt-2.5 block w-fit max-w-full bg-accent px-3 py-1 text-paper tracking-tighter md:mt-3">
-                    We&apos;re the ones who write it.
-                  </span>
-                </h1>
-                <div className="mt-8">
-                  <Link
-                    href="/contact"
-                    className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95"
-                  >
-                    Get in touch
-                    <ArrowUpRightIcon />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="home-minimal">
+      <section className="brand-hero" aria-label="Trevalt">
+        <h1 className="sr-only">Trevalt</h1>
+        <HeroAsciiMorph />
+        <span className="brand-hero-mobile-word" aria-hidden="true">Trevalt</span>
+      </section>
 
-          <div className="hidden flex-col justify-start p-6 font-mono text-[0.68rem] uppercase tracking-[0.16em] md:flex py-8 md:py-14 space-y-12">
-            <div>
-              <span className="block text-muted font-bold">SERVICES_INTEGRATED</span>
-              <div className="mt-4 space-y-4">
-                <div className="border-b border-border/40 pb-2">
-                  <span className="block text-accent text-[0.6rem] tracking-[0.2em]">01 / WEBSITES</span>
-                  <span className="mt-1 block text-ink text-[0.65rem]">Next.js / React / MERN</span>
-                </div>
-                <div className="border-b border-border/40 pb-2">
-                  <span className="block text-accent text-[0.6rem] tracking-[0.2em]">02 / MOBILE APPS</span>
-                  <span className="mt-1 block text-ink text-[0.65rem]">Kotlin / Compose / Android</span>
-                </div>
+      <section className="home-intro w-full px-5 md:px-8" aria-labelledby="home-intro-title">
+        <h2 id="home-intro-title" className="sr-only">What we do</h2>
+        <div className="home-services">
+          <div><span>01</span><strong>Web</strong><small>Websites &amp; software</small></div>
+          <div><span>02</span><strong>Android</strong><small>Mobile applications</small></div>
+          <div><span>03</span><strong>AI</strong><small>Machine learning systems</small></div>
+          <Link href="/contact" className="home-services-contact">Have a project? <b>Contact us ↗</b></Link>
+        </div>
+      </section>
+
+      <section className="home-work w-full px-5 md:px-8" aria-labelledby="home-work-title">
+        <div className="home-section-heading">
+          <h2 id="home-work-title">Work</h2>
+          <Link href="/projects">All projects <span aria-hidden="true">↗</span></Link>
+        </div>
+
+        <div className="home-featured-list">
+          {featuredProjects.map((project) => (
+            <Link className="home-featured" href={`/projects/${project.slug}`} key={project.slug}>
+              <div className="home-featured-image">
+                {project.slug === 'geowav' ? (
+                  <div className="geowav-preview-grid" aria-label="GeoWav app screens">
+                    {project.screenshots?.slice(0, 3).map((src, shotIndex) => (
+                      <div className={`geowav-preview-shot geowav-preview-shot-${shotIndex + 1}`} key={src}>
+                        <Image src={src} alt={`GeoWav app screen ${shotIndex + 1}`} fill sizes="(max-width: 767px) 30vw, 20vw" className="object-contain" />
+                      </div>
+                    ))}
+                  </div>
+                ) : project.screenshots?.[0] && (
+                  <Image
+                    src={project.screenshots[0]}
+                    alt={`${project.title} preview`}
+                    fill
+                    sizes="(max-width: 767px) 100vw, 50vw"
+                    className="object-contain"
+                  />
+                )}
+              </div>
+              <div className="home-featured-copy">
+                <span>{project.category}</span>
+                <h3>{project.title}</h3>
+                <p>{project.tagline}</p>
+                <span className="home-project-action">View project <span aria-hidden="true">↗</span></span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-more w-full px-5 md:px-8" aria-labelledby="home-more-title">
+        <div className="home-section-heading">
+          <h2 id="home-more-title">More work</h2>
+          <span className="home-drag-hint">Drag to explore</span>
+        </div>
+        <div ref={cardAreaRef} className="home-card-area">
+          {draggableProjects.map((project, index) => {
+            const position = cardPositions[index % cardPositions.length];
+            return (
+              <motion.div
+                key={project.slug}
+                drag={!compact}
+                dragConstraints={cardAreaRef}
+                dragElastic={0.1}
+                whileDrag={{ scale: 1.02, zIndex: 10 }}
+                className="project-card home-draggable-card"
+                style={compact ? undefined : { left: position.left, top: position.top, rotate: position.rotate }}
+              >
+                <span className="project-card-index">0{index + 3} / {project.category}</span>
                 <div>
-                  <span className="block text-accent text-[0.6rem] tracking-[0.2em]">03 / AI & ML</span>
-                  <span className="mt-1 block text-ink text-[0.65rem]">Go gRPC / PyTorch / CUDA</span>
+                  <h3>{project.title}</h3>
+                  <p>{project.tagline}</p>
                 </div>
-              </div>
-            </div>
-
-            <div className="border-t border-border pt-4">
-              <span className="block text-muted font-bold">STUDIO_STATEMENT</span>
-              <p className="mt-2 text-[0.65rem] leading-4 text-muted normal-case font-sans tracking-normal">
-                A three-person engineering studio covering Android, full-stack web, and AI. Small enough to ship in weeks, skilled enough to bypass the learning curve.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full border-t border-border">
-          <div
-            data-hero-keycap
-            className="flex h-[34vh] w-full min-h-[220px] items-center overflow-hidden bg-card/20 md:h-[40vh]"
-          >
-            <HeroAsciiMorph />
-          </div>
-        </div>
-      </section>
-
-      {/* Major 01 - NewAgeIT */}
-      <section
-        ref={majorOneRef}
-        className="relative flex min-h-[600px] md:min-h-[700px] items-center overflow-hidden border-b border-border"
-      >
-        <div data-project-numeral className="pointer-events-none absolute right-4 top-4 z-0 select-none font-display text-[14rem] font-bold leading-none tracking-display text-ink/[0.03] md:right-12 md:top-6 md:text-[20rem]">
-          01
-        </div>
-        <div className="relative z-10 mx-auto grid w-full max-w-[var(--page-max)] gap-8 px-5 py-6 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-8">
-          <div className="relative max-w-[42rem]">
-            <div data-project-meta className="mb-6 flex items-center gap-4 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
-              <span>01 / 05 // CASE STUDY</span>
-            </div>
-            <Link href={`/projects/${majorProjects[0].slug}`} className="group/title block w-fit">
-              <div data-project-title className="font-display text-4xl font-bold tracking-display transition-colors duration-200 group-hover/title:text-accent md:text-5xl lg:text-7xl">
-                {majorProjects[0].title}
-              </div>
-            </Link>
-            <p data-project-copy className="mt-6 max-w-[36rem] text-base leading-7 text-muted md:text-lg md:leading-8">
-              {majorProjects[0].tagline}
-            </p>
-
-            <div className="mt-8 space-y-4 border-t border-b border-border py-6">
-              <div className="grid gap-2 md:grid-cols-[8rem_1fr] md:gap-4 font-mono text-[0.72rem] tracking-[0.16em]">
-                <span className="uppercase text-accent">Stack</span>
-                <span className="text-muted">{majorProjects[0].tech.join(' // ')}</span>
-              </div>
-              <div className="grid gap-2 md:grid-cols-[8rem_1fr] md:gap-4 font-mono text-[0.72rem] tracking-[0.16em]">
-                <span className="uppercase text-accent">Core Specs</span>
-                <span className="text-muted">modular checkout architecture // intelligent parts compatibility engine // GST-aware dynamic routing</span>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href={`/projects/${majorProjects[0].slug}`}
-                className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95"
-              >
-                Inspect brief
-                <ArrowUpRightIcon />
-              </Link>
-              {majorProjects[0].links?.[0] && (
-                <a
-                  href={majorProjects[0].links[0].href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-border bg-transparent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-accent/40 hover:bg-accent/5 hover:text-accent active:scale-95"
-                >
-                  {majorProjects[0].links[0].label}
-                  <ArrowUpRightIcon />
-                </a>
-              )}
-            </div>
-          </div>
-          <Link
-            href={`/projects/${majorProjects[0].slug}`}
-            data-project-mockup
-            className="block w-full max-w-[450px] lg:max-w-[550px] justify-self-center origin-center will-change-transform transition-transform duration-300 hover:scale-[1.015]"
-          >
-            <Mockup
-              type="laptop"
-              label="NewAgeIT Live Operations Console"
-              imageSrc={majorProjects[0].screenshots?.[0]}
-              imageAlt="NewAgeIT Live Operations Console"
-            />
-          </Link>
-        </div>
-      </section>
-
-      {/* Major 02 - GeoWav */}
-      <section
-        ref={majorTwoRef}
-        className="relative flex min-h-[600px] md:min-h-[700px] items-center overflow-hidden border-b border-border"
-      >
-        <div data-project-numeral className="pointer-events-none absolute bottom-4 left-4 z-0 select-none font-display text-[14rem] font-bold leading-none tracking-display text-ink/[0.03] md:bottom-6 md:left-12 md:text-[20rem]">
-          02
-        </div>
-        <div className="relative z-10 mx-auto grid w-full max-w-[var(--page-max)] gap-8 px-5 py-6 md:grid-cols-[0.85fr_1.15fr] md:items-center md:px-8">
-          <Link
-            href={`/projects/${majorProjects[1].slug}`}
-            data-project-mockup
-            className="order-2 block w-full max-w-[220px] lg:max-w-[260px] justify-self-center origin-center will-change-transform transition-transform duration-300 hover:scale-[1.015] md:order-1"
-          >
-            <Mockup
-              type="phone"
-              label="GeoWav / App preview"
-              imageSrc={majorProjects[1].screenshots?.[0] || '/images/projects/01.png'}
-              imageAlt="GeoWav app screen"
-            />
-          </Link>
-          <div className="order-1 max-w-[42rem] md:order-2 md:justify-self-start">
-            <div data-project-meta className="mb-6 flex items-center gap-4 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
-              <span>02 / 05 // CASE STUDY</span>
-            </div>
-            <Link href={`/projects/${majorProjects[1].slug}`} className="group/title block w-fit">
-              <div data-project-title className="font-display text-4xl font-bold tracking-display transition-colors duration-200 group-hover/title:text-accent md:text-5xl lg:text-7xl">
-                {majorProjects[1].title}
-              </div>
-            </Link>
-            <p data-project-copy className="mt-6 max-w-[36rem] text-base leading-7 text-muted md:text-lg md:leading-8">
-              {majorProjects[1].tagline}
-            </p>
-            <div className="mt-8 space-y-4 border-t border-b border-border py-6">
-              <div className="grid gap-2 md:grid-cols-[8rem_1fr] md:gap-4 font-mono text-[0.72rem] tracking-[0.16em]">
-                <span className="uppercase text-accent">Stack</span>
-                <span className="text-muted">{majorProjects[1].tech.join(' // ')}</span>
-              </div>
-              <div className="grid gap-2 md:grid-cols-[8rem_1fr] md:gap-4 font-mono text-[0.72rem] tracking-[0.16em]">
-                <span className="uppercase text-accent">Performance</span>
-                <span className="text-muted">under 1.8% battery usage per hour // delta coordinates routing</span>
-              </div>
-            </div>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href={`/projects/${majorProjects[1].slug}`}
-                className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_15px_-3px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_25px_-3px_var(--accent)] active:scale-95"
-              >
-                Inspect brief
-                <ArrowUpRightIcon />
-              </Link>
-              <a
-                href={majorProjects[1].links?.[0]?.href}
-                target="_blank"
-                rel="noreferrer"
-                className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-border bg-transparent px-6 py-2.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-accent/40 hover:bg-accent/5 hover:text-accent active:scale-95"
-              >
-                <PlayStoreIcon />
-                Live app
-                <ArrowUpRightIcon />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Minor Projects */}
-      <section ref={minorRef} className="relative overflow-hidden border-b border-border bg-paper bg-[linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] bg-[size:40px_40px]">
-        <div ref={minorConstraintsRef} className="relative mx-auto w-full max-w-[var(--page-max)] px-5 py-16 md:px-8 md:py-24 md:min-h-[750px]">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between border-b border-border md:border-none pb-8 md:pb-0 pointer-events-none relative z-10">
-            <h2 className="max-w-[32rem] font-display text-3xl font-bold tracking-display md:text-4xl lg:text-5xl bg-paper/80 backdrop-blur-sm p-2 -ml-2 rounded-lg">
-              More projects.
-            </h2>
-            <div className="mt-4 md:mt-0 bg-paper/80 backdrop-blur-sm p-2 rounded-lg">
-              <p
-                className="text-lg text-accent tracking-wide normal-case"
-                style={{ fontFamily: "'Brush Script MT', 'Apple Chancery', 'Comic Sans MS', cursive" }}
-              >
-                interactive — drag cards to explore
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:mt-0 md:block relative z-20">
-            {minorProjects.map((project, index) => {
-              const pos = scatterPositions[index % scatterPositions.length];
-              return (
-                <div
-                  key={project.slug}
-                  data-minor-item
-                  className={isMobile ? "w-full" : "absolute"}
-                  style={isMobile ? {} : { left: pos.left, top: pos.top }}
-                >
-                  <motion.div
-                    drag={!isMobile}
-                    dragConstraints={minorConstraintsRef}
-                    dragElastic={0.1}
-                    whileDrag={{ scale: 1.02, boxShadow: '0 20px 40px rgba(0,0,0,0.5)', zIndex: 50 }}
-                    style={{
-                      rotate: isMobile ? 0 : pos.rotate,
-                      width: isMobile ? '100%' : '340px'
-                    }}
-                    className="group border border-border bg-card p-6 flex flex-col justify-between min-h-[300px] transition-colors duration-200 hover:border-accent/50 md:cursor-grab md:active:cursor-grabbing select-none shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
-                  >
-                    <div className="pointer-events-none">
-                      <div className="flex justify-between items-center font-mono text-[0.65rem] tracking-[0.2em] text-accent uppercase">
-                        <span>[SLOT 0{index + 3}]</span>
-                        <span>{project.category ?? 'MODULE'}</span>
-                      </div>
-                      <h3 className="mt-6 font-display text-3xl font-bold tracking-display group-hover:text-accent transition-colors duration-200">{project.title}</h3>
-                      <p className="mt-3 text-sm leading-6 text-muted">{project.tagline}</p>
-                    </div>
-
-                    <div className="mt-8">
-                      <div className="flex flex-wrap gap-2 text-[0.65rem] font-mono uppercase tracking-[0.16em] text-muted border-t border-border/60 pt-4 mb-5 pointer-events-none">
-                        {project.tech.map((tag) => (
-                          <span key={tag} className="border border-border px-2 py-1">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <Link
-                        href={`/projects/${project.slug}`}
-                        onPointerDown={(e) => e.stopPropagation()}
-                        className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-border bg-transparent px-5 py-2 font-mono text-[0.6rem] font-bold uppercase tracking-[0.2em] text-muted backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-accent/40 hover:bg-accent/5 hover:text-accent active:scale-95 md:cursor-pointer"
-                      >
-                        OPEN PROJECT
-                        <ArrowUpRightIcon />
-                      </Link>
-                    </div>
-                  </motion.div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Closing / Contact CTA */}
-      <section ref={closingRef} className="relative flex items-center border-t border-border bg-card/20 py-24 md:py-32 overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,var(--accent)_0%,transparent_50%)] opacity-[0.03]"></div>
-        
-        <div className="relative z-10 mx-auto grid w-full max-w-[var(--page-max)] gap-16 px-5 md:grid-cols-[1fr_350px] lg:grid-cols-[1fr_400px] md:items-end md:px-8">
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col gap-8"
-          >
-            <div className="flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-accent">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-              </span>
-              Accepting New Projects
-            </div>
-            
-            <h2 data-closing-copy className="max-w-[40rem] font-display text-5xl font-bold leading-[0.9] tracking-display md:text-7xl lg:text-[7rem]">
-              Let&apos;s build <br/><span className="text-muted">together.</span>
-            </h2>
-            
-            <div className="mt-4">
-              <Link
-                href="/contact"
-                className="relative inline-flex w-fit items-center gap-2 overflow-hidden rounded-full bg-accent px-8 py-4 font-mono text-[0.75rem] font-bold uppercase tracking-[0.2em] text-paper shadow-[0_0_20px_-5px_var(--accent)] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_30px_-5px_var(--accent)] active:scale-95"
-              >
-                Start a project
-                <ArrowUpRightIcon />
-              </Link>
-            </div>
-          </motion.div>
-
-          <div className="grid gap-12 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-muted">
-            
-            {/* Contact */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="group flex flex-col gap-4 border-l-2 border-border/50 pl-6 transition-colors duration-300 hover:border-accent"
-            >
-              <span className="text-accent font-bold tracking-[0.2em]">01 // DIRECTORY</span>
-              <a href="mailto:trevalt.tech@gmail.com" className="text-lg font-sans font-medium text-ink lowercase tracking-normal transition-colors duration-300 group-hover:text-accent">
-                trevalt.tech@gmail.com
-              </a>
-              <span className="text-[0.6rem] leading-relaxed">
-                Response expected within<br/>24 business hours.
-              </span>
-            </motion.div>
-
-            {/* Studio / Location */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="flex flex-col gap-4 border-l-2 border-border/50 pl-6 transition-colors duration-300 hover:border-accent"
-            >
-              <span className="text-accent font-bold tracking-[0.2em]">02 // STUDIO</span>
-              <div className="flex flex-col gap-2 text-[0.65rem]">
-                <span>EST. 2026</span>
-                <span>GLOBAL / REMOTE</span>
-                <span>CORES: 3</span>
-              </div>
-            </motion.div>
-            
-          </div>
+                <Link href={`/projects/${project.slug}`} onPointerDown={(event) => event.stopPropagation()} className="project-card-link">
+                  View project <span aria-hidden="true">↗</span>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
     </div>

@@ -96,7 +96,7 @@ const serviceSections = [
 export default function TermsPage() {
   return (
     <SiteShell>
-      <section className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-16">
+      <section className="terms-page mx-auto w-full max-w-[var(--page-max)] px-5 py-12 md:px-8 md:py-16">
         <div className="grid gap-12 lg:grid-cols-[15rem_1fr] lg:gap-20">
           <aside className="h-fit lg:sticky lg:top-8">
             <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-accent">Legal / 01</p>

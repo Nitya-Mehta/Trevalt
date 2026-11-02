@@ -47,7 +47,7 @@ function nityaFrontSvg(founder: Founder) {
       <rect width="1200" height="685" rx="14" fill="#001246"/>
       
       <!-- Top Left Label -->
-      <text x="68" y="90" fill="#f7fbfd" font-family="System-ui, -apple-system, sans-serif" font-size="36" font-weight="500">Devloper.</text>
+      <text x="68" y="90" fill="#f7fbfd" font-family="System-ui, -apple-system, sans-serif" font-size="36" font-weight="500">Developer.</text>
       
       <!-- Giant Display Name -->
       <text x="330" y="295" fill="#f7fbfd" font-family="Fraunces, Georgia, serif" font-size="180" font-weight="900" letter-spacing="-5">NITYA</text>
@@ -350,7 +350,7 @@ function NityaCardFront() {
     <div className="absolute inset-0 select-none overflow-hidden rounded-[14px] bg-[#001246] p-[6cqw] text-[#f7fbfd] flex flex-col justify-between border border-[#001246] h-full w-full">
       {/* Top Left Label */}
       <div className="text-[3.2cqw] font-medium tracking-normal font-sans text-left">
-        Full-Stack & AI/ML Devloper.
+        Full-Stack & AI/ML Developer.
       </div>
 
       {/* Giant Display Name */}
@@ -565,20 +565,26 @@ export function FounderCard({
   const isNitya = founder.name.includes('Nitya');
   const isAarav = founder.name.includes('Aarav');
   const isDevanshu = founder.name.includes('Devanshu');
+  const toggle = () => {
+    if (onToggleFlip) onToggleFlip();
+    else setLocalFlipped((value) => !value);
+  };
 
   return (
-    <button
-      type="button"
-      onClick={() => {
-        if (onToggleFlip) {
-          onToggleFlip();
-        } else {
-          setLocalFlipped((value) => !value);
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={toggle}
+      onMouseEnter={() => !reduceMotion && setLocalFlipped(true)}
+      onMouseLeave={() => !reduceMotion && setLocalFlipped(false)}
+      onKeyDown={(event) => {
+        if (event.target !== event.currentTarget) return;
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggle();
         }
       }}
-      onMouseEnter={() => !reduceMotion && isFlipped === undefined && setLocalFlipped(true)}
-      onMouseLeave={() => !reduceMotion && isFlipped === undefined && setLocalFlipped(false)}
-      className="block w-full text-left"
+      className="block w-full cursor-pointer text-left"
       aria-label={`Flip card for ${founder.name}`}
       data-flipped={flipped ? 'true' : 'false'}
     >
@@ -739,6 +745,6 @@ export function FounderCard({
           </motion.div>
         )}
       </div>
-    </button>
+    </div>
   );
 }

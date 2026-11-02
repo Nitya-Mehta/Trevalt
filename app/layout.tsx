@@ -2,13 +2,15 @@ import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import '@fontsource/space-grotesk/700.css';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/fraunces/900.css';
 
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {

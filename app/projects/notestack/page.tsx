@@ -26,7 +26,7 @@ export default function NoteStackPage() {
 
   return (
     <SiteShell>
-      <div className="min-h-screen pb-32">
+      <div className="case-study min-h-screen pb-32">
 
         {/* HERO SECTION */}
         <section className="relative w-full max-w-[var(--page-max)] mx-auto px-5 pt-12 pb-24 md:px-8 md:pt-16 md:pb-32 border-b border-border">
@@ -50,7 +50,7 @@ export default function NoteStackPage() {
               )}
               <div className="inline-flex items-center gap-3 mb-6">
                 <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-accent">
-                  [ {project.category || 'CASE STUDY'} ]
+                  {project.category || 'Case study'}
                 </span>
               </div>
 
@@ -59,11 +59,11 @@ export default function NoteStackPage() {
               </h1>
 
               <p className="mt-8 text-lg text-muted leading-relaxed max-w-3xl">
-                {project.story || project.description}
+                {project.tagline}
               </p>
 
               <div className="mt-8 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-muted flex items-center gap-2 border-b-2 border-accent pb-2">
-                BUILT BY: <span className="text-ink font-bold">{project.developer}</span>
+                By <span className="text-ink font-bold">{project.developer}</span>
               </div>
 
               <div className="mt-8 flex flex-wrap justify-center gap-2 max-w-2xl">
@@ -81,8 +81,8 @@ export default function NoteStackPage() {
                     href={link.href}
                     target="_blank"
                     className={`px-8 py-3.5 rounded-full font-bold tracking-wide flex items-center gap-2 text-sm transition-colors ${link.label.toLowerCase().includes('play') || link.label.toLowerCase().includes('live')
-                        ? 'bg-accent hover:bg-accent/80 text-white'
-                        : 'bg-card hover:bg-white/5 text-ink border border-border'
+                        ? 'bg-ink hover:bg-accent text-paper'
+                        : 'bg-card hover:border-ink text-ink border border-border'
                       }`}
                   >
                     {link.label} {link.label.toLowerCase().includes('github') ? <GitHubIcon /> : <ArrowUpRightIcon />}
@@ -103,7 +103,7 @@ export default function NoteStackPage() {
             style={{ scrollBehavior: 'smooth' }}
           >
             {screenshots.map((src, idx) => (
-              <div key={idx} className="relative flex-none w-[60vw] sm:w-[35vw] md:w-[25vw] lg:w-[18vw] xl:w-[15vw] snap-center rounded-[2rem] overflow-hidden shadow-2xl bg-black">
+              <div key={idx} className="relative flex-none w-[60vw] sm:w-[35vw] md:w-[25vw] lg:w-[18vw] xl:w-[15vw] snap-center rounded-[2rem] overflow-hidden shadow-2xl bg-[#121412]">
                 <ZoomableImage
                   src={src}
                   alt={`${project.title} UI Preview ${idx + 1}`}
@@ -117,6 +117,10 @@ export default function NoteStackPage() {
         {/* README STYLE DOCUMENTATION */}
         <section className="w-full max-w-[var(--page-max)] mx-auto px-5 md:px-8 py-24">
           <div className="max-w-[48rem]">
+            <div className="mb-20 border-b border-border pb-16">
+              <span className="state-kicker">The brief</span>
+              <p className="mt-6 text-lg leading-8 text-muted">{project.story || project.description}</p>
+            </div>
 
             {/* FEATURES */}
             {project.features && project.features.length > 0 && (
